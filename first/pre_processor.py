@@ -22,13 +22,16 @@ class PreProcessor:
 
             if striped_line.startswith(self.identifier):
                 code = striped_line[len(self.identifier)::]
-                result+=f'{ident_text}{code}\n'
 
                 if code.endswith(self.start_scope):
+                    code = code[0:len(code) -len(self.start_scope)]
+                    result+=f'{ident_text}{code}\n'
                     ident_level+=1
                     ident_text = create_ident_text(ident_level)
-                continue
-        
+                    continue
+                result+=f'{ident_text}{code}\n'
+
+
             if striped_line == self.endscope:
                 ident_level-=1
                 ident_text = create_ident_text(ident_level)
