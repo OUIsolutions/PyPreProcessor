@@ -10,4 +10,10 @@ v = VirtualMachine()
 v.exec([
 
     ["declare","r",10]
+    
+    ["declare","x",30]
+
+
 ])
+
+print(v.stack)

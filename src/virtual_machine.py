@@ -3,17 +3,16 @@
 class VirtualMachine:
 
     def __init__(self) -> None:
-        self.stack = [
-            []
-        ]            
+        self.stack = [{}]            
         self.stack_point = 0
         self.instruction_point = 0
         self.instructions = []
     
 
 
-    def _instruction_declare(values:list):
-        pass
+    def _instruction_declare(self,values:list):
+        self.stack[self.stack_point][values[0]] = values[1]
+
 
 
     def _syscall(self):
@@ -30,7 +29,6 @@ class VirtualMachine:
 
         action_function =  self.__getattribute__(f'_instruction_{action}')
         action_function(args)
-
 
 
     def exec(self,content:list):
