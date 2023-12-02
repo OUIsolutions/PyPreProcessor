@@ -31,24 +31,23 @@ class PreProcessor:
     def generate_content_func(self,content:str)->str:
         ident_level = 0
         ident_text = ''
-        result =''
+        result ='self.text+="'
         inside_comptime = False
-        instruction = ''
         for i  in range(0,len(content)):
             current_char = content[i]
 
             if not inside_comptime:
                 
                 if self.is_string_from_point(content,i,self.identifier):
+                    result+='"'
                     inside_comptime = True
                     i+=len(self.identifier)
                     continue
 
-                result+=current_char
+                result+=current_char.replace("\n","\\n")
+                continue
 
-            if False:
-            
-                instruction+=current_char
+                            
                 #print(instruction)
                 
 
