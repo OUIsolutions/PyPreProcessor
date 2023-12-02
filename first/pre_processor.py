@@ -2,7 +2,7 @@ from extras import generate_content_func
 class PreProcessor:
 
     def __init__(self) -> None:
-        self.args = {}
+    
         self.identifier = '#comptime:'
         self._text = ''
         
@@ -36,7 +36,5 @@ class PreProcessor:
 
 
     def compile(self,file:str)->str:
-        self.args = {}
-        self._text = ''
         self.input(file)
         return self._text

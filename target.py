@@ -5,7 +5,10 @@
 r = 30 
 class Soma:
     def __init__(self) -> None:
-        #comptime:if r == 20 #do
-        pass
-        #end
+    #comptime:
+    #comptime:if self.r == 20 #do
+        r == 30
+    #end
+    
+    
         
