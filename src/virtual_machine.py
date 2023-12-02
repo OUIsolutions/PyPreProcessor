@@ -10,9 +10,16 @@ class VirtualMachine:
     
 
     def _get_value(self,value:list):
-        pass 
-    
-    def _instruction_declare(self,values:list):
+        TYPE = 0
+        ELEMENT =1
+        element = value[ELEMENT]
+        if value[TYPE] == 'raw':
+            return  element
+        if value[TYPE] == 'ref':
+            return self.stack[self.stack_point][element]
+
+        
+    def _instruction_set(self,values:list):
         self.stack[self.stack_point][values[0]] = self._get_value(values[1])
 
 
