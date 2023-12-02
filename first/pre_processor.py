@@ -49,7 +49,7 @@ class PreProcessor:
         current_char = self._registers.code[self._registers.point]
         self._registers.stage+=current_char
 
-        
+
        
         
 
@@ -76,67 +76,7 @@ class PreProcessor:
 
         
 
-
-
-
     def compile(self,file:str)->str:
         with open(file,'r') as arq:
             self._exec_code(arq.read())
         return self._registers.compilation_result
-
-        
-
-
-   
-
-
-    def _dIscard(self,callback_args:list):
-        if not self._registers.operating:
-            return None
-        
-        self._registers.operating = False 
-    
-
-    def _eNd(self,callback_args:list):
-        self._registers.operating =True
-
-    
-
-
-    def _iNclude(self,callback_args:list)->str:
-        if not self._registers.operating:
-            return None
-        
-        try:
-            file = callback_args[0]
-        except IndexError:
-            raise IndexError('file not passed in args ')
-
-        
-        with open(file,'r') as arq:
-            content = arq.read()
-        
-        self._exec_code(content)
-
-        
-    
-    def _rEf(self,callback_args:list)->str or None:
-        if not self._registers.operating:
-            return None
-        
-        try:
-            arg_to_print = callback_args[0]
-        except IndexError:
-            raise IndexError('reference not provided')
-        
-        try:
-            value = self.args[arg_to_print]
-        except KeyError:
-            raise KeyError(f'args {self.args} not have {arg_to_print}')
-
-        
-        return str(value)
-    
-
-
-
