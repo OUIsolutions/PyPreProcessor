@@ -52,7 +52,7 @@ class PreProcessor:
             if not inside_comptime:
                 
                 if self.is_string_from_point(content,i,self.identifier):
-                    result+='"\n'
+                    result+=f'"\n{ident_text}'
                     inside_comptime = True
                     i+=len(self.identifier)
                     continue
@@ -60,16 +60,20 @@ class PreProcessor:
                 result+=current_char.replace("\n","\\n")
                 i+=1
                 continue
-
             
             end_char = self.get_expected_if_is_one_of_expecteds(content,i,self.end_comptimes)
             if end_char:
-                result+='\nself.text+="'
-
+                result+=f'\n{ident_text}self.text+="'
                 inside_comptime = False
                 i+=len(end_char)
-
                 continue
+           
+            if self.is_string_from_point(content,i,self.start_scope):
+                ident_level+=1
+                ident_text = self.create_ident_text(ident_level)
+
+
+            
 
 
             result+=current_char
