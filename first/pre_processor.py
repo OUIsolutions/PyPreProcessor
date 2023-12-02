@@ -25,7 +25,6 @@ class PreProcessor:
         ident_text = ''
         result =''
         inside_comptime = False
-        stage = ''
         
         for i  in range(0,len(content)):
 
@@ -39,7 +38,9 @@ class PreProcessor:
                     result+=content[i]
                     continue
 
-                possible_identifier = content[i:i+len(self.identifier)]    
+
+                possible_identifier = content[i:i+len(self.identifier)]
+                print(possible_identifier)
                 is_a_identifier = possible_identifier == self.identifier
                 if is_a_identifier:
                     inside_comptime = True 
@@ -75,6 +76,7 @@ class PreProcessor:
         
         result+=stage
         '''
+            
         return result
 
 

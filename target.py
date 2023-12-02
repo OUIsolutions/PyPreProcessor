@@ -1,6 +1,6 @@
 
 
-
+r = 30
 
 #comptime:self.include('a.py')
 #comptime:if self.t ==  20: 
