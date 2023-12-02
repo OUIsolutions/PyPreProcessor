@@ -43,40 +43,12 @@ class PreProcessor:
                 return action
 
 
-    def _get_char_or_empty(self,char:str)->str:
-        if self.discard:
-            return ''
-        return char
-    
-
-    def _dIscard(self,callback_args:list):
-        self._registers.operating = False 
-    
-
-    def _eNd(self,callback_args:list):
-        self._registers.operating =True
-
-
-
-    def _iNclude(self,callback_args:list)->str:
-        try:
-            file = callback_args[0]
-        except IndexError:
-            raise IndexError('file not passed in args ')
-        started_identation = self._registers.acumulated_ident
-
-        result = ''
-        with open(file,'r') as arq:
-            content = arq.read()
-        content_size = len(content)
-        i = 0
-
-
-        while True:
+    def _syscall_tic(self,content:str, content_size:int,started_identation:str):
+            
+            if self._registers.point >= content_size:
+                return False 
             
             
-            if i >= content_size:
-                break
             
             current_char = content[i]
             if current_char == '\n':
@@ -87,22 +59,67 @@ class PreProcessor:
 
             action = self._get_action_from_point(content,i)
             
-            if not action:
-                result+=self._get_char_or_empty(current_char)
-                i+=1
-                continue
+            action_not_provided = not action
+            if action_not_provided and self._registers.operating:
+                self._registers.output+=current_char
+                self._registers.point+=1
+                return True
+
+        
+            action_result = self._exec_action(action,content,self._registers.point)
+
+            if action_result and not self._registers.operating:
+                raise Exception('you cannot return an text when its not operating')
             
-
-            action_result = self._exec_action(action,content,i)
-          
             if action_result:
-                result+=str(action_result)
+                self._registers.output+=str(action_result)
 
-            i=action_result.point
+            self._registers.point=action_result.point
 
+
+
+    def _syscall(self,content:str):
+        started_identation = self._registers.acumulated_ident
+        content_size = len(content)
+        self._registers.point = 0
+
+        while self._syscall_tic(
+            content=content,
+            started_identation=started_identation,
+            content_size=content_size
+        ):pass 
 
         self._registers.acumulated_ident = started_identation 
-        return aply_ident(text=result,ident=self.acumulated_ident)
+        self._registers.output+=aply_ident(
+                text=self._registers.output,
+                ident=self._registers.acumulated_ident
+        )
+    
+
+
+
+
+
+    def _dIscard(self,callback_args:list):
+        self._registers.operating = False 
+    
+
+    def _eNd(self,callback_args:list):
+        self._registers.operating =True
+
+    
+
+
+    def _iNclude(self,callback_args:list)->str:
+        try:
+            file = callback_args[0]
+        except IndexError:
+            raise IndexError('file not passed in args ')
+
+        
+        with open(file,'r') as arq:
+            content = arq.read()
+
         
         
 
