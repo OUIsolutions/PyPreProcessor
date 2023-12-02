@@ -13,7 +13,6 @@ class PreProcessor:
         self.args = {}
         self.include_name = ref('iNclude')
         self.ref_name = ref('rEf')
-        self.embed_name ='embed('
         self.break_char = ')'
         self.acumulated_ident = 0
     
