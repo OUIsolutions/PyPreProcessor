@@ -40,9 +40,9 @@ class PreProcessor:
     def _syscall(self):
             
             if self._registers.point >= self._registers.code_size:
-               self._registers.output+=aply_ident(
-                        text=self._registers.output,
-                        ident=self._registers.acumulated_ident
+               self._registers.compilation_result+=aply_ident(
+                        text=self._registers.compilation_result,
+                        ident=0
                 )
     
         
@@ -75,7 +75,7 @@ class PreProcessor:
     def compile(self,file:str)->str:
         with open(file,'r') as arq:
             self._exec_code(arq.read())
-        return self._registers.output
+        return self._registers.compilation_result
 
         
 
