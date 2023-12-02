@@ -5,7 +5,7 @@ from typing import List
 from typing import Callable
 from typing import Any
 from json import loads
-from .registers import Registers
+from .cpu import Cpu
 
 class PreProcessor:
 
@@ -17,7 +17,7 @@ class PreProcessor:
         self.end_name = '#end('
         self.ref_name = '#ref('
         self.break_char = ')'
-        self._registers = Registers()
+        self._registers = Cpu()
 
     
     
