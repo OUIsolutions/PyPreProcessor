@@ -1,8 +1,12 @@
 
 class Teste:
 
-    #include("a.py",add(10,20))
-    r = ref('a')
 
-    x = ref('x')
+    #declare(a,30)
+    #declare(r,30)
+
+    #if(r,==,30)
+    x =20
+    #end()
+    
     
