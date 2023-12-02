@@ -20,8 +20,8 @@ class PreProcessor:
     
     def _get_actions(self)->List[Action]:
         return [
-            Action(self._include,self.include_name),
-            Action(self._ref,self.ref_name),
+            Action(self._iNclude,self.include_name),
+            Action(self._rEf,self.ref_name),
         ]
     
 
@@ -43,7 +43,7 @@ class PreProcessor:
 
 
 
-    def _include(self,callback_args:list)->str:
+    def _iNclude(self,callback_args:list)->str:
         try:
             file = callback_args[0]
         except IndexError:
@@ -87,7 +87,7 @@ class PreProcessor:
         return aply_ident(text=result,ident=self.acumulated_ident)
         
         
-    def _ref(self,callback_args:list)->str:
+    def _rEf(self,callback_args:list)->str:
         try:
             arg_to_print = callback_args[0]
         except IndexError:
@@ -123,6 +123,7 @@ class PreProcessor:
             
         args_string+=']'        
         print(args_string)
+        
         formated = loads(args_string)
         result = action.call(callback_args=formated)
         return ActionResult(text=result,point=i)
@@ -131,7 +132,7 @@ class PreProcessor:
 
 
     def compile(self,file:str)->str:
-        return self._include([file])
+        return self._iNclude([file])
         
 
         

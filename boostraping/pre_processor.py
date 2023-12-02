@@ -1,20 +1,26 @@
+from action import Action
+from action_result import ActionResult
+from extras import aply_ident
+from typing import List
+from typing import Callable
+from typing import Any
+from json import loads
 
 
 class PreProcessor:
 
     def __init__(self) -> None:
         self.args = {}
-        #these its nescessary for generating the boostraping process
-        self.include_name = ref('include')
-        self.ref_name = ref('ref')
-
+        self.include_name = ref('_iNclude')
+        self.ref_name = ref('_iNref')
+        self.embed_name ='embed('
         self.break_char = ')'
         self.acumulated_ident = 0
     
     
     def _get_actions(self)->List[Action]:
         return [
-            Action(self._nclude,self.include_name),
+            Action(self._iNclude,self.include_name),
             Action(self._ref,self.ref_name),
         ]
     
@@ -33,10 +39,11 @@ class PreProcessor:
                 return action
             
 
+    
 
 
 
-    def _nclude(self,callback_args:list)->str:
+    def _iNclude(self,callback_args:list)->str:
         try:
             file = callback_args[0]
         except IndexError:
@@ -90,11 +97,10 @@ class PreProcessor:
             value = self.args[arg_to_print]
         except KeyError:
             raise KeyError(f'args {self.args} not have {arg_to_print}')
+
+        
         return str(value)
     
-
-
-
 
 
 
@@ -115,7 +121,9 @@ class PreProcessor:
             args_string+=current_char
            
             
-        args_string+=']'
+        args_string+=']'        
+        print(args_string)
+        
         formated = loads(args_string)
         result = action.call(callback_args=formated)
         return ActionResult(text=result,point=i)
@@ -124,7 +132,7 @@ class PreProcessor:
 
 
     def compile(self,file:str)->str:
-        return self._include([file])
+        return self._iNclude([file])
         
 
         
