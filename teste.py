@@ -9,9 +9,9 @@ v = VirtualMachine()
 
 v.exec([
 
-    ["declare","r",10]
-    
-    ["declare","x",30]
+    ["set","r",10]
+
+    ["set","x","r"]
 
 
 ])
