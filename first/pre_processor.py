@@ -1,3 +1,5 @@
+
+from typing import List
 class PreProcessor:
 
     def __init__(self) -> None:
@@ -27,7 +29,12 @@ class PreProcessor:
         except IndexError:
             return False
           
-
+    def get_expected_if_is_one_of_expecteds(self,content:str,point:int,expecteds:List[str]):
+        for i in expecteds:
+            if self.is_string_from_point(content,point,i):
+                return i
+        return None
+    
     def generate_content_func(self,content:str)->str:
         ident_level = 0
         ident_text = ''
@@ -48,9 +55,15 @@ class PreProcessor:
                 continue
 
             
+            end_char = self.get_expected_if_is_one_of_expecteds(content,i,self.end_comptimes)
+            if end_char:
+                result+='\nself.text+="'
 
-            result+=self.create_ident_text(ident_level)
-            
+                inside_comptime = False
+                i+=len(end_char)
+                continue
+
+            #result+=current_char
         
         
             
