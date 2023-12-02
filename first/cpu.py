@@ -9,5 +9,5 @@ class Cpu:
         self.point = 0
         self.output =''
         self.text = None
-    
+        self.code = ''
     

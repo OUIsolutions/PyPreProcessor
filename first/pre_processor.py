@@ -78,10 +78,12 @@ class PreProcessor:
 
 
 
-    def _syscall(self,content:str):
+    def _exec(self,content:str):
+        
+        self._cpu.code+=content
         started_identation = self._cpu.acumulated_ident
         content_size = len(content)
-        self._cpu.point = 0
+        
 
         while self._syscall_tic(
             content=content,
@@ -95,7 +97,8 @@ class PreProcessor:
                 ident=self._cpu.acumulated_ident
         )
     
-    
+
+
     def compile(self,file:str)->str:
         return self._iNclude([file])
         
@@ -132,7 +135,7 @@ class PreProcessor:
         with open(file,'r') as arq:
             content = arq.read()
         
-        self._syscall(content)
+        self._exec(content)
 
         
     
