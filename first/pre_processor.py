@@ -1,4 +1,4 @@
-from extras import convert_content
+from extras import generate_content_func
 class PreProcessor:
 
     def __init__(self) -> None:
@@ -12,7 +12,7 @@ class PreProcessor:
     def input(self,file:str):
         with open(file,'r') as arq:
             content = arq.read()
-        converted = convert_content(content)
+        converted = generate_content_func(content)
         print(converted)
 
 
