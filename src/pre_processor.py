@@ -22,7 +22,6 @@ class PreProcessor:
         return [
             Action(self._include,self.include_name),
             Action(self._ref,self.ref_name),
-            Action(self._embed,self.embed_name)
         ]
     
 
@@ -100,8 +99,9 @@ class PreProcessor:
             raise KeyError(f'args {self.args} not have {arg_to_print}')
         return str(value)
     
-    def _embed(self,callback_args:list,args:dict)->str:
-        return 'nada'
+
+
+
 
 
 
@@ -130,8 +130,10 @@ class PreProcessor:
 
 
 
-    def amalgamate(self,file:str)->str:
-        return self._include([file])
+    def compile(self,file:str)->str:
+        result = self._include([file])
+        
+
         
 
 
