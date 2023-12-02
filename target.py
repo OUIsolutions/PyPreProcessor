@@ -6,9 +6,12 @@ r = 30
 class Soma:
     def __init__(self) -> None:
     #comptime:
-    #comptime:if self.r == 20 #do
+    #comptime:if self.r == 20:do
         r == 30
+        x:str
+        #comptime:self.embed('x','a.txt')
+
     #end
-    
+
     
         

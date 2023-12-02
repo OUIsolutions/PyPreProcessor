@@ -1,9 +1,11 @@
-from extras import generate_content_func
+from extras import create_ident_text
 class PreProcessor:
 
     def __init__(self) -> None:
     
         self.identifier = '#comptime:'
+        self.start_scope = 'do'
+        self.endscope ='#end'
         self._text = ''
         
       
@@ -19,9 +21,17 @@ class PreProcessor:
             striped_line = line.strip()
 
             if striped_line.startswith(self.identifier):
-                code = striped_line[len(self.identifier):-1]
-                result+=f'{code}\n'
+                code = striped_line[len(self.identifier)::]
+                if code.endswith(self.start_scope):
+                    ident_level+=1
+                    ident_text = create_ident_text(ident_level)
+                result+=f'{ident_text}{code}\n'
+                continue
         
+            if striped_line == self.endscope:
+                ident_level-=1
+                ident_text = create_ident_text(ident_level)
+
 
             result+=f'{ident_text}self.text+="{line}"\n'
         return result
