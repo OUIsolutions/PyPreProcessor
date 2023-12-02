@@ -1,8 +1,10 @@
 from .action import Action
-from .action_result import ActionResout
+from .action_result import ActionResult
 from typing import List
 from typing import Callable
 from json import loads
+
+
 class PreProcessor:
 
     def __init__(self) -> None:
@@ -48,7 +50,7 @@ class PreProcessor:
         return 'nada'
 
 
-    def _exec_action(self,action:Action,content:str,point:int,args:dict)->ActionResout:
+    def _exec_action(self,action:Action,content:str,point:int,args:dict)->ActionResult:
         
         start_point = point+len(action)
         content_size = len(content)
@@ -67,8 +69,8 @@ class PreProcessor:
             
         args_string+=']'
         formated = loads(args_string)
-        action.call(formated,args)
-
+        result = action.call(formated,args)
+        return ActionResult(result,i)
 
 
     def amalgamate(self,file:str,args:dict={})->str:
@@ -86,8 +88,8 @@ class PreProcessor:
                 result+=current_char
                 continue
             
-            self._exec_action(action,content,i,args)
-
+            action_result = self._exec_action(action,content,i,args)
+            print(action_result)
             
          
 
