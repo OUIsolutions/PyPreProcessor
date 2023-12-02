@@ -55,6 +55,7 @@ class PreProcessor:
             content = arq.read()
         converted = self.generate_content_func(content)
         exec(converted)
+
     def compile(self,file:str)->str:
         self.include(file)
         return self._text
