@@ -1,6 +1,6 @@
 from typing import Callable
 
-class Action:
+class BuildInProcedure:
 
     def __init__(self,action:Callable,name:str,simple_scope_open:bool =False,end_scope:bool=False) -> None:
         self.action = action

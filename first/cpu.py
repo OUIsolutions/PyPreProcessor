@@ -8,3 +8,6 @@ class Cpu:
         self.jump = 0
         self.point = 0
         self.output =''
+        self.text = None
+    
+    

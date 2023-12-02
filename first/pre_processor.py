@@ -1,5 +1,4 @@
-from action import Action
-from action_result import ActionResult
+from first.build_in_procedure import BuildInProcedure
 from extras import aply_ident
 from typing import List
 from typing import Callable
@@ -21,27 +20,27 @@ class PreProcessor:
 
     
     
-    def _get_procedure(self)->List[Action]:
+    def _get_procedure(self)->List[BuildInProcedure]:
         return [
-            Action(self._iNclude,self.include_name),
-            Action(self._rEf,self.ref_name),
-            Action(self._dIscard,self.discard_name,simple_scope_open=True),
-            Action(self._eNd,self.end_name,end_scope=True)
+            BuildInProcedure(self._iNclude,self.include_name),
+            BuildInProcedure(self._rEf,self.ref_name),
+            BuildInProcedure(self._dIscard,self.discard_name,simple_scope_open=True),
+            BuildInProcedure(self._eNd,self.end_name,end_scope=True)
         ]
     
 
-    def _get_action_from_point(self,text:str,start_point:int)->Action or None:
-        actions = self._get_procedure()
-        for action in actions:
-            action:Action
+    def _get_action_from_point(self,text:str,start_point:int)->BuildInProcedure or None:
+        procedures = self._get_procedure()
+        for proc in procedures:
+            proc:BuildInProcedure
 
             try:
-                end_point = start_point + len(action)
-                possible_action = text[start_point:end_point]
+                end_point = start_point + len(proc)
+                possible_call = text[start_point:end_point]
             except IndexError:
                 continue
-            if possible_action == str(action):
-                return action
+            if possible_call == str(proc):
+                return proc
 
 
     def _syscall_tic(self,content:str, content_size:int,started_identation:str):
@@ -66,7 +65,7 @@ class PreProcessor:
                 return True
 
         
-            action_result = self._exec_action(action,content,self._cpu.point)
+            action_result = self._exec_procedure(action,content,self._cpu.point)
 
             if str(action_result) and not self._cpu.operating:
                 raise Exception('you cannot return an text when its not operating')
@@ -96,6 +95,14 @@ class PreProcessor:
                 ident=self._cpu.acumulated_ident
         )
     
+    def compile(self,file:str)->str:
+        return self._iNclude([file])
+        
+
+        
+
+
+   
 
 
     def _dIscard(self,callback_args:list):
@@ -146,38 +153,5 @@ class PreProcessor:
         return str(value)
     
 
-
-
-    def _exec_action(self,action:Action,content:str,point:int)->ActionResult:
-        
-        start_point = point+len(action)
-        content_size = len(content)
-        args_string = '['
-        i = start_point
-        while True:
-            current_char = content[i]
-            i+=1
-            if current_char == self.break_char:
-                break
-            if current_char == "'":
-                args_string+='"'
-                continue
-            args_string+=current_char
-           
-            
-        args_string+=']'        
-        
-        formated = loads(args_string)
-        result = action.call(callback_args=formated)
-        return ActionResult(text=result,point=i)
-
-
-
-
-    def compile(self,file:str)->str:
-        return self._iNclude([file])
-        
-
-        
 
 
