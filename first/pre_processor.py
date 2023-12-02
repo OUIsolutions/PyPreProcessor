@@ -65,7 +65,7 @@ class PreProcessor:
                 return True
 
         
-            action_result = self._exec_procedure(action,content,self._cpu.point)
+            action_result = self._exec_code_procedure(action,content,self._cpu.point)
 
             if str(action_result) and not self._cpu.operating:
                 raise Exception('you cannot return an text when its not operating')
@@ -78,7 +78,7 @@ class PreProcessor:
 
 
 
-    def _exec(self,content:str):
+    def _exec_code(self,content:str):
         
         self._cpu.code+=content
         started_identation = self._cpu.acumulated_ident
@@ -135,7 +135,7 @@ class PreProcessor:
         with open(file,'r') as arq:
             content = arq.read()
         
-        self._exec(content)
+        self._exec_code(content)
 
         
     
