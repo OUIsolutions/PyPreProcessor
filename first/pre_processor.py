@@ -17,7 +17,7 @@ class PreProcessor:
         self.ref_name = '#ref('
         self.break_char = ')'
         self._registers = Registers()
-
+        self._pending_calls = []
     
     
     def _get_procedures(self)->List[BuildInProcedure]:
@@ -49,6 +49,7 @@ class PreProcessor:
         current_char = self._registers.code[self._registers.point]
         self._registers.stage+=current_char
 
+        
        
         
 
