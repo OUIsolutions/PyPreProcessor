@@ -16,8 +16,8 @@ class PreProcessor:
         self.discard_name ='#discard('
         self.ref_name = '#ref('
         self.break_char = ')'
-        self.registers = Registers()
-        
+        self._registers = Registers()
+
     
     
     def _get_actions(self)->List[Action]:
@@ -45,9 +45,15 @@ class PreProcessor:
             return ''
         return char
     
+    
     def _dIscard(self,callback_args:list):
-        self.discard = True 
-        
+        self._registers.discard = True 
+    
+
+    def _eNddiscard(self,callback_args:list):
+        self._registers.discard =False
+
+
 
     def _iNclude(self,callback_args:list)->str:
         try:
