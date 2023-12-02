@@ -8,15 +8,7 @@ class Registers:
 
         self.jump = 0
         self.point = 0
-
         self.stage = ''
-        self.callback_action:Callable = None
-        self.args =[
-
-            
-        ]
-
-
         self.compilation_result =''
 
         #stores the code of the program
