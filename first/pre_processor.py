@@ -58,8 +58,11 @@ class PreProcessor:
             )
             
             self._registers.resset_stage()
+            self._registers.point+=len(possible_procedure)
             return self._registers.next()
         
+        
+
 
 
         return self._registers.next()
