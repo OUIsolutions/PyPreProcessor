@@ -1,10 +1,9 @@
 
-class Teste:
-  
-    include("a.txt")
 
 
-    r = ref('10')
+from src.pre_processor import PreProcessor
 
-    x = ref('x')
-    
+p = PreProcessor()
+
+x = p.amalgamate('target.py')
+print(x)
