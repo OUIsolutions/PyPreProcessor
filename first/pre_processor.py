@@ -7,8 +7,8 @@ class PreProcessor:
         self.endscope ='#end'
         self._text = ''
         #args
-        self.t = 30
-        
+        self.t = 20
+        self.r= 30
         
     @staticmethod
     def create_ident_text(ident_level:int):    
