@@ -1,0 +1,9 @@
+
+
+declare(r,30)
+declare(x,30)
+
+if(x,==,30)
+    
+
+end()
