@@ -1,6 +1,6 @@
 
 declare(r,10)
-declare(r,30)
+declare(r , 30)
 
 
     

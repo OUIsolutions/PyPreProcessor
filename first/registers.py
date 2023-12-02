@@ -19,12 +19,15 @@ class Registers:
     def resset_stage(self):
         self.stage = ''
 
-    def get_current_char(self):
+    def get_current_char(self)->str:
         return self.code[self.point]
   
     def add_last_char_to_stage(self):
         self.stage+=self.get_current_char()
 
-    def next(self):
+    def is_stage(self,text:str):
+        return self.stage == text
+    
+    def next(self)->bool:
         self.point+=1
         return True

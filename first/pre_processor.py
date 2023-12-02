@@ -61,6 +61,10 @@ class PreProcessor:
             self._registers.point+=len(possible_procedure)
             return self._registers.next()
         
+        runing_procedure = len(self._pending_calls) > 0
+        if runing_procedure and self._registers.is_stage(','):
+            
+
         
 
 
