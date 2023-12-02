@@ -81,7 +81,9 @@ class PreProcessor:
             
 
             action_result = self._exec_action(action,content,i)
-            result+=str(action_result)
+            if action_result:
+                result+=str(action_result)
+            
             i=action_result.point
 
         self.acumulated_ident = started_identation 
