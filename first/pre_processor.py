@@ -14,6 +14,7 @@ class PreProcessor:
     
         self.include_name = '#include('
         self.discard_name ='#discard('
+        self.end_name = '#end('
         self.ref_name = '#ref('
         self.break_char = ')'
         self._registers = Registers()
@@ -24,6 +25,7 @@ class PreProcessor:
         return [
             Action(self._iNclude,self.include_name),
             Action(self._rEf,self.ref_name),
+            Action(self._dIscard,self.discard_name)
         ]
     
 
@@ -40,18 +42,19 @@ class PreProcessor:
             if possible_action == str(action):
                 return action
 
+
     def _get_char_or_empty(self,char:str)->str:
         if self.discard:
             return ''
         return char
     
-    
+
     def _dIscard(self,callback_args:list):
-        self._registers.discard = True 
+        self._registers.operating = False 
     
 
-    def _eNddiscard(self,callback_args:list):
-        self._registers.discard =False
+    def _eNd(self,callback_args:list):
+        self._registers.operating =True
 
 
 
