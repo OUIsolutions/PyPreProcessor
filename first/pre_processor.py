@@ -5,6 +5,7 @@ class PreProcessor:
         self.identifier = '#comptime:'
         self.start_scope = ':'
         self.endscope ='#end'
+        self.end_comptimes = ['\n','#']
         self._text = ''
         #args
         self.t = 20
@@ -20,15 +21,38 @@ class PreProcessor:
 
 
     def generate_content_func(self,content:str)->str:
-        lines = content.split('\n')
         ident_level = 0
         ident_text = ''
         result =''
-        for line in lines:
-            if line =='':
-                continue
-            
-            striped_line = line.strip()
+        inside_comptime = False
+        stage = ''
+        
+        for i  in range(0,len(content)):
+
+            if not inside_comptime:
+
+                if i < len(self.identifier):
+                    result+=content[i]
+                    continue
+
+                if i > len(content) - len(self.identifier):
+                    result+=content[i]
+                    continue
+
+                possible_identifier = content[i:i+len(self.identifier)]    
+                is_a_identifier = possible_identifier == self.identifier
+                if is_a_identifier:
+                    inside_comptime = True 
+
+                if not is_a_identifier:
+                    result+=content[i]
+
+
+            '''
+            #means its equal to comtime
+            result+=stage
+
+            instruction_striped = stage.strip()
 
             if striped_line.startswith(self.identifier):
                 code = striped_line[len(self.identifier)::]
@@ -47,6 +71,10 @@ class PreProcessor:
                 continue
             result+=f'{ident_text}self._text+="\\n{line}"\n'
         result+=self.create_ident_text(ident_level)
+        
+        
+        result+=stage
+        '''
         return result
 
 
@@ -55,7 +83,7 @@ class PreProcessor:
         with open(file,'r') as arq:
             content = arq.read()
         converted = self.generate_content_func(content)
-        exec(converted)
+        print(converted)
 
     def compile(self,file:str)->str:
         self.include(file)

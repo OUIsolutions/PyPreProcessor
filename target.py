@@ -2,7 +2,6 @@
 
 
 
-
 #comptime:self.include('a.py')
 #comptime:if self.t ==  20: 
 r = 30 
