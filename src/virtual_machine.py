@@ -10,17 +10,18 @@ class VirtualMachine:
     
 
     def _get_value(self,value:list):
-        TYPE = 0
-        ELEMENT =1
-        element = value[ELEMENT]
-        if value[TYPE] == 'raw':
+        
+        type = value[0]
+        element = value[1]
+        if type == 'raw':
             return  element
-        if value[TYPE] == 'ref':
+        if type == 'ref':
             return self.stack[self.stack_point][element]
 
-        
+
     def _instruction_set(self,values:list):
-        self.stack[self.stack_point][values[0]] = self._get_value(values[1])
+        var = values[0]
+        self.stack[self.stack_point][var] = self._get_value(values[1])
 
 
 
