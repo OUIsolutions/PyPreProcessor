@@ -4,7 +4,7 @@ class Teste:
     include("a.txt")
 
 
-    r = ref('10',10,20)
+    r = ref('a')
 
     x = ref('x')
     

@@ -2,6 +2,7 @@ from .action import Action
 from .action_result import ActionResult
 from typing import List
 from typing import Callable
+from typing import Any
 from json import loads
 
 
@@ -43,10 +44,20 @@ class PreProcessor:
         
     
     def _ref(self,callback_args:list,args:dict)->str:
-        return 'nada'
+        try:
+            arg_to_print = callback_args[0]
+        except IndexError:
+            raise IndexError('reference not provided')
+        
+        try:
+            value = args[arg_to_print]
+        except KeyError:
+            raise KeyError(f'args {args} not have {arg_to_print}')
+        return str(value)
     
     def _embed(self,callback_args:list,args:dict)->str:
         return 'nada'
+
 
 
     def _exec_action(self,action:Action,content:str,point:int,args:dict)->ActionResult:
