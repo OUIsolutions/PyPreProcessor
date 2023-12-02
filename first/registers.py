@@ -1,13 +1,17 @@
 
 
-class Cpu:
+class Registers:
 
     
     def __init__(self) -> None:
-        self.acumulated_ident = 0
+        #self.acumulated_ident = 0
+        
         self.jump = 0
         self.point = 0
+
         self.output =''
-        self.text = None
+
+        #stores the code of the program
         self.code = ''
         self.code_size = 0
+

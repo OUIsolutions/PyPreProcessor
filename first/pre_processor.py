@@ -4,7 +4,7 @@ from typing import List
 from typing import Callable
 from typing import Any
 from json import loads
-from .cpu import Cpu
+from .registers import Registers
 
 class PreProcessor:
 
@@ -16,11 +16,11 @@ class PreProcessor:
         self.end_name = '#end('
         self.ref_name = '#ref('
         self.break_char = ')'
-        self._cpu = Cpu()
+        self._registers = Registers()
 
     
     
-    def _get_procedure(self)->List[BuildInProcedure]:
+    def _get_procedures(self)->List[BuildInProcedure]:
         return [
             BuildInProcedure(self._iNclude,self.include_name),
             BuildInProcedure(self._rEf,self.ref_name),
@@ -29,65 +29,43 @@ class PreProcessor:
         ]
     
 
-    def _get_action_from_point(self,text:str,start_point:int)->BuildInProcedure or None:
-        procedures = self._get_procedure()
+    def _get_possible_action(self,possible_procedure:str)->BuildInProcedure or None:
+        procedures = self._get_procedures()
         for proc in procedures:
             proc:BuildInProcedure
-
-            try:
-                end_point = start_point + len(proc)
-                possible_call = text[start_point:end_point]
-            except IndexError:
-                continue
-            if possible_call == str(proc):
+            if possible_procedure == str(proc):
                 return proc
 
 
     def _syscall(self):
             
-            if self._cpu.point >= self._cpu.code_size:
-               self._cpu.output+=aply_ident(
-                        text=self._cpu.output,
-                        ident=self._cpu.acumulated_ident
+            if self._registers.point >= self._registers.code_size:
+               self._registers.output+=aply_ident(
+                        text=self._registers.output,
+                        ident=self._registers.acumulated_ident
                 )
     
-            
-            
-            current_char = self._cpu.code[self._cpu.point]
-            if current_char == '\n':
-                self._cpu.acumulated_ident = started_identation
-            else:
-                self._cpu.acumulated_ident+=1
-            
-
-            action = self._get_action_from_point(content,self._cpu.point)
-            
-            action_not_provided = not action
-            if action_not_provided and self._cpu.operating:
-                self._cpu.output+=current_char
-                self._cpu.point+=1
-                return True
-
         
-            action_result = self._exec_code_procedure(action,content,self._cpu.point)
+            current_char = self._registers.code[self._registers.point]
 
-            if str(action_result) and not self._cpu.operating:
-                raise Exception('you cannot return an text when its not operating')
+
+            #if current_char == '\n':
+            #    self._registers.acumulated_ident = started_identation
+            #else:
+            #    self._registers.acumulated_ident+=1
+            
+            action = self._get_action_from_point()
             
             
-            if action_result:
-                self._cpu.output+=str(action_result)
-
-            self._cpu.point=action_result.point
 
 
 
     def _exec_code(self,content:str):
         
-        self._cpu.code+=content
-        self._cpu.code_size+=len(content)
+        self._registers.code+=content
+        self._registers.code_size+=len(content)
         while self._syscall():pass 
-        
+
 
         
 
@@ -97,7 +75,7 @@ class PreProcessor:
     def compile(self,file:str)->str:
         with open(file,'r') as arq:
             self._exec_code(arq.read())
-        return self._cpu.output
+        return self._registers.output
 
         
 
@@ -106,20 +84,20 @@ class PreProcessor:
 
 
     def _dIscard(self,callback_args:list):
-        if not self._cpu.operating:
+        if not self._registers.operating:
             return None
         
-        self._cpu.operating = False 
+        self._registers.operating = False 
     
 
     def _eNd(self,callback_args:list):
-        self._cpu.operating =True
+        self._registers.operating =True
 
     
 
 
     def _iNclude(self,callback_args:list)->str:
-        if not self._cpu.operating:
+        if not self._registers.operating:
             return None
         
         try:
@@ -136,7 +114,7 @@ class PreProcessor:
         
     
     def _rEf(self,callback_args:list)->str or None:
-        if not self._cpu.operating:
+        if not self._registers.operating:
             return None
         
         try:
