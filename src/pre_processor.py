@@ -44,7 +44,6 @@ class PreProcessor:
     
     def _ref(self,callback_args:list,args:dict)->str:
         return 'nada'
-        pass 
     
     def _embed(self,callback_args:list,args:dict)->str:
         return 'nada'
@@ -69,8 +68,9 @@ class PreProcessor:
             
         args_string+=']'
         formated = loads(args_string)
-        result = action.call(formated,args)
-        return ActionResult(result,i)
+        result = action.call(callback_args=formated,args=args)
+        return ActionResult(text=result,point=i)
+
 
 
     def amalgamate(self,file:str,args:dict={})->str:
@@ -83,19 +83,22 @@ class PreProcessor:
         while True:
             
             
+            if i == content_size:
+                break
+
+                        
             action = self._get_action_from_point(content,i)
             
             if not action:
                 current_char = content[i]
                 result+=current_char
+                i+=1
                 continue
             
             action_result = self._exec_action(action,content,i,args)
-            
-            i = action_result.point
-            
-            if i == content_size:
-                break
+            result+=str(action_result)
+            i=action_result.point
+
          
 
 
