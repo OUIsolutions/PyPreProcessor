@@ -49,12 +49,14 @@ class PreProcessor:
         except IndexError:
             raise IndexError('file not passed in args ')
         
+        started_identation = self.acumulated_ident
 
         result = ''
         with open(file,'r') as arq:
             content = arq.read()
         content_size = len(content)
         i = 0
+
 
         while True:
             
@@ -63,8 +65,10 @@ class PreProcessor:
                 break
             
             current_char = content[i]
+            if current_char == '\n':
+                self.acumulated_ident = started_identation
+            self.acumulated_ident+=1
             
-    
 
             action = self._get_action_from_point(content,i)
             
@@ -79,7 +83,7 @@ class PreProcessor:
             i=action_result.point
 
          
-        return aply_ident(text=result,ident=4)
+        return aply_ident(text=result,ident=self.acumulated_ident)
         
         
     def _ref(self,callback_args:list)->str:
