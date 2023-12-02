@@ -39,6 +39,7 @@ class PreProcessor:
                 return action
             
 
+    
 
 
 
@@ -121,7 +122,7 @@ class PreProcessor:
             args_string+=current_char
            
             
-        args_string+=']'
+        args_string+=']'        
         formated = loads(args_string)
         result = action.call(callback_args=formated)
         return ActionResult(text=result,point=i)

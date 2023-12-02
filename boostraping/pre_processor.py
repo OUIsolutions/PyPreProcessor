@@ -4,16 +4,15 @@ class PreProcessor:
 
     def __init__(self) -> None:
         self.args = {}
-        self.include_name = 'include('
-        self.ref_name = 'ref('
-        self.embed_name ='embed('
+        self.include_name = ref('include')
+        self.ref_name = ref('ref')
         self.break_char = ')'
         self.acumulated_ident = 0
     
     
     def _get_actions(self)->List[Action]:
         return [
-            Action(self._include,self.include_name),
+            Action(self._nclude,self.include_name),
             Action(self._ref,self.ref_name),
         ]
     
@@ -35,7 +34,7 @@ class PreProcessor:
 
 
 
-    def _include(self,callback_args:list)->str:
+    def _nclude(self,callback_args:list)->str:
         try:
             file = callback_args[0]
         except IndexError:
