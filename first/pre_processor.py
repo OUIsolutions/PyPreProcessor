@@ -49,6 +49,7 @@ class PreProcessor:
         current_char = self._registers.code[self._registers.point]
         self._registers.stage+=current_char
 
+        
 
 
         #if current_char == '\n':
@@ -56,7 +57,7 @@ class PreProcessor:
         #else:
         #    self._registers.acumulated_ident+=1
         
-        
+
         self._registers.point+=1
         return True
         
