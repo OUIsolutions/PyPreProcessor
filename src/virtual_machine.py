@@ -9,10 +9,8 @@ class VirtualMachine:
         self.instructions = []
     
 
-    def _get_value(self,value:list or str):
-        if isinstance(value,list):
-           return self.stack[value[0]]
-        return value
+    def _get_value(self,value:list):
+        pass 
     
     def _instruction_declare(self,values:list):
         self.stack[self.stack_point][values[0]] = self._get_value(values[1])
