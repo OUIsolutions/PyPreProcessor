@@ -4,8 +4,10 @@ class PreProcessor:
 
     def __init__(self) -> None:
         self.args = {}
+        #these its nescessary for generating the boostraping process
         self.include_name = ref('include')
         self.ref_name = ref('ref')
+
         self.break_char = ')'
         self.acumulated_ident = 0
     

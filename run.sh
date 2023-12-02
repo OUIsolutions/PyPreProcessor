@@ -1,1 +1,1 @@
-python3 first/main.py  boostraping/main.py  PreProcessor.py
+python3 first/main.py  boostraping/main.py  PreProcessor.py '{"ref":"ref(","include":"include("}'
