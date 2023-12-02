@@ -20,65 +20,65 @@ class PreProcessor:
         return ident_text
 
 
+    def is_string_from_point(self,content:str,point:int,expected:str):
+        try:
+            comparation = content[point:point+len(expected)]
+            return comparation == expected
+        except IndexError:
+            return False
+          
+
     def generate_content_func(self,content:str)->str:
         ident_level = 0
         ident_text = ''
         result =''
         inside_comptime = False
-        
+        instruction = ''
         for i  in range(0,len(content)):
+            current_char = content[i]
 
             if not inside_comptime:
                 
-
-                current_char = content[i]
-                
-                if i > len(content) - len(self.identifier):
-                    result+=current_char
-                    continue
-
-
-                possible_identifier = content[i:i+len(self.identifier)]
-                is_a_identifier = possible_identifier == self.identifier
-       
-
-                if is_a_identifier:
+                if self.is_string_from_point(content,i,self.identifier):
                     inside_comptime = True
                     i+=len(self.identifier)
                     continue
 
+                result+=current_char
 
-                if not is_a_identifier:
-                    result+=current_char
+            if False:
+            
+                instruction+=current_char
+                #print(instruction)
+                
+
+                '''
+                #means its equal to comtime
+                result+=stage
+
+                instruction_striped = stage.strip()
+
+                if striped_line.startswith(self.identifier):
+                    code = striped_line[len(self.identifier)::]
+                    result+=f'{ident_text}{code}\n'
+
+                    if code.endswith(self.start_scope):
+                        ident_level+=1
+                        ident_text = self.create_ident_text(ident_level)
+                        
+                    continue
 
 
-            '''
-            #means its equal to comtime
-            result+=stage
-
-            instruction_striped = stage.strip()
-
-            if striped_line.startswith(self.identifier):
-                code = striped_line[len(self.identifier)::]
-                result+=f'{ident_text}{code}\n'
-
-                if code.endswith(self.start_scope):
-                    ident_level+=1
+                if striped_line == self.endscope:
+                    ident_level-=1
                     ident_text = self.create_ident_text(ident_level)
-                    
-                continue
+                    continue
+                result+=f'{ident_text}self._text+="\\n{line}"\n'
 
-
-            if striped_line == self.endscope:
-                ident_level-=1
-                ident_text = self.create_ident_text(ident_level)
-                continue
-            result+=f'{ident_text}self._text+="\\n{line}"\n'
-        result+=self.create_ident_text(ident_level)
+                result+=self.create_ident_text(ident_level)
+                '''
         
         
-        result+=stage
-        '''
             
         return result
 
