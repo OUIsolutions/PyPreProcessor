@@ -4,7 +4,7 @@ r = 30
 
 #comptime:self.include('a.py')
 #comptime:if self.t ==  20: 
-r = 30 
+r = 40 
 class Soma:
     def __init__(self) -> None:
     #comptime:if self.r == 20:
