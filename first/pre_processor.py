@@ -6,6 +6,9 @@ class PreProcessor:
         self.start_scope = ':'
         self.endscope ='#end'
         self._text = ''
+        #args
+        self.t = 30
+        
         
     @staticmethod
     def create_ident_text(ident_level:int):    
@@ -41,7 +44,7 @@ class PreProcessor:
                 ident_text = self.create_ident_text(ident_level)
                 continue
 
-            result+=f'{ident_text}self.text+="{line}"\n'
+            result+=f'{ident_text}self._text+="{line}"\n'
         result+=self.create_ident_text(ident_level)
         return result
 

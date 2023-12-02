@@ -3,7 +3,7 @@
 
 
 
-#comptime:self.include('a.txt')
+#comptime:self.include('a.py')
 #comptime:if self.t ==  20: 
 r = 30 
 class Soma:
