@@ -49,7 +49,6 @@ class PreProcessor:
                 return False 
             
             
-            
             current_char = content[i]
             if current_char == '\n':
                 self._registers.acumulated_ident = started_identation
@@ -57,7 +56,7 @@ class PreProcessor:
                 self._registers.acumulated_ident+=1
             
 
-            action = self._get_action_from_point(content,i)
+            action = self._get_action_from_point(content,self._registers.point)
             
             action_not_provided = not action
             if action_not_provided and self._registers.operating:
@@ -68,8 +67,9 @@ class PreProcessor:
         
             action_result = self._exec_action(action,content,self._registers.point)
 
-            if action_result and not self._registers.operating:
+            if str(action_result) and not self._registers.operating:
                 raise Exception('you cannot return an text when its not operating')
+            
             
             if action_result:
                 self._registers.output+=str(action_result)
@@ -97,10 +97,10 @@ class PreProcessor:
     
 
 
-
-
-
     def _dIscard(self,callback_args:list):
+        if not self._registers.operating:
+            return None
+        
         self._registers.operating = False 
     
 
@@ -111,6 +111,9 @@ class PreProcessor:
 
 
     def _iNclude(self,callback_args:list)->str:
+        if not self._registers.operating:
+            return None
+        
         try:
             file = callback_args[0]
         except IndexError:
@@ -119,11 +122,15 @@ class PreProcessor:
         
         with open(file,'r') as arq:
             content = arq.read()
+        
+        self._syscall(content)
 
         
+    
+    def _rEf(self,callback_args:list)->str or None:
+        if not self._registers.operating:
+            return None
         
-
-    def _rEf(self,callback_args:list)->str:
         try:
             arg_to_print = callback_args[0]
         except IndexError:
