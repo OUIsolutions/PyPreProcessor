@@ -5,19 +5,19 @@ from typing import List
 from typing import Callable
 from typing import Any
 from json import loads
-
+from .registers import Registers
 
 class PreProcessor:
 
     def __init__(self) -> None:
         self.args = {}
-        self.discard = False
     
         self.include_name = '#include('
         self.discard_name ='#discard('
         self.ref_name = '#ref('
         self.break_char = ')'
-        self.acumulated_ident = 0
+        self.registers = Registers()
+        
     
     
     def _get_actions(self)->List[Action]:
@@ -39,8 +39,12 @@ class PreProcessor:
                 continue
             if possible_action == str(action):
                 return action
-            
 
+    def _get_char_or_empty(self,char:str)->str:
+        if self.discard:
+            return ''
+        return char
+    
     def _dIscard(self,callback_args:list):
         self.discard = True 
         
@@ -75,7 +79,7 @@ class PreProcessor:
             action = self._get_action_from_point(content,i)
             
             if not action:
-                result+=current_char
+                result+=self._get_char_or_empty(current_char)
                 i+=1
                 continue
             
