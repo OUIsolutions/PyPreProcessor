@@ -6,6 +6,9 @@ class Action:
         self.action = action
         self._name = name
 
+    def call(self,callback_args:list,args:dict):
+        self.action(callback_args,args)
+
     def __len__(self):
         return len(self._name)
     

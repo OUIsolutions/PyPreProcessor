@@ -1,4 +1,5 @@
 from .action import Action
+from .action_result import ActionResout
 from typing import List
 from typing import Callable
 from json import loads
@@ -47,24 +48,27 @@ class PreProcessor:
         return 'nada'
 
 
-    def _exec_action(self,action:Action,content:str,point:int,args:dict)->str:
+    def _exec_action(self,action:Action,content:str,point:int,args:dict)->ActionResout:
         
         start_point = point+len(action)
         content_size = len(content)
         args_string = '['
-        for i in range(start_point,content_size):
+        i = start_point
+        while True:
             current_char = content[i]
+            i+=1
             if current_char == self.break_char:
                 break
             if current_char == "'":
                 args_string+='"'
                 continue
             args_string+=current_char
-        
-        
+           
+            
         args_string+=']'
         formated = loads(args_string)
-        print(formated)
+        action.call(formated,args)
+
 
 
     def amalgamate(self,file:str,args:dict={})->str:
