@@ -43,8 +43,7 @@ class PreProcessor:
                 ident_level-=1
                 ident_text = self.create_ident_text(ident_level)
                 continue
-
-            result+=f'{ident_text}self._text+="{line}"\n'
+            result+=f'{ident_text}self._text+="\\n{line}"\n'
         result+=self.create_ident_text(ident_level)
         return result
 
