@@ -97,11 +97,10 @@ class PreProcessor:
             value = self.args[arg_to_print]
         except KeyError:
             raise KeyError(f'args {self.args} not have {arg_to_print}')
+
+        
         return str(value)
     
-
-
-
 
 
 
@@ -123,6 +122,7 @@ class PreProcessor:
            
             
         args_string+=']'        
+        print(args_string)
         formated = loads(args_string)
         result = action.call(callback_args=formated)
         return ActionResult(text=result,point=i)
