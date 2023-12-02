@@ -5,7 +5,7 @@ from json import loads
 from json import JSONDecodeError
 from sys import argv
 from sys import exit
-
+import traceback
 def main():
     try:
         target = argv[1]
@@ -35,7 +35,8 @@ def main():
     try:
         result = preprocessor.compile(target)
     except Exception as e:
-        print(e)
+        print(traceback.format_exc())
+
         exit(1)
     
     with open(output,'w') as arq:
