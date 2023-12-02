@@ -79,7 +79,9 @@ class PreProcessor:
         with open(file,'r') as arq:
             content = arq.read()
         content_size = len(content)
-        for i in range(0,content_size):
+        i = 0
+        while True:
+            
             
             action = self._get_action_from_point(content,i)
             
@@ -89,8 +91,11 @@ class PreProcessor:
                 continue
             
             action_result = self._exec_action(action,content,i,args)
-            print(action_result)
             
+            i = action_result.point
+            
+            if i == content_size:
+                break
          
 
 
