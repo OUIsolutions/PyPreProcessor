@@ -1,6 +1,6 @@
 
 class Teste:
-  
+
     include("a.py")
     r = ref('a')
 

@@ -48,7 +48,7 @@ class PreProcessor:
             file = callback_args[0]
         except IndexError:
             raise IndexError('file not passed in args ')
-        
+        print(self.acumulated_ident)
         started_identation = self.acumulated_ident
 
         result = ''
@@ -67,7 +67,8 @@ class PreProcessor:
             current_char = content[i]
             if current_char == '\n':
                 self.acumulated_ident = started_identation
-            self.acumulated_ident+=1
+            else:
+                self.acumulated_ident+=1
             
 
             action = self._get_action_from_point(content,i)
@@ -83,7 +84,7 @@ class PreProcessor:
             i=action_result.point
 
         self.acumulated_ident = started_identation 
-        
+
         return aply_ident(text=result,ident=self.acumulated_ident)
         
         
