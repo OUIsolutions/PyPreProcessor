@@ -11,8 +11,8 @@ class PreProcessor:
       
     def generate_content_func(self,content:str)->str:
         lines = content.split('\n')
-        ident_level = 0
-        ident_text = ''
+        ident_level = 2
+        ident_text = create_ident_text(ident_level)
         result =''
         for line in lines:
             if line =='':
