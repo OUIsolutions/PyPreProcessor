@@ -31,20 +31,19 @@ class PreProcessor:
             if striped_line == self.endscope:
                 ident_level-=1
                 ident_text = create_ident_text(ident_level)
-
+                continue
 
             result+=f'{ident_text}self.text+="{line}"\n'
         return result
 
 
 
-    def input(self,file:str):
+    def include(self,file:str):
         with open(file,'r') as arq:
             content = arq.read()
         converted = self.generate_content_func(content)
-        print(converted)
-
+        
 
     def compile(self,file:str)->str:
-        self.input(file)
+        self.include(file)
         return self._text
