@@ -61,6 +61,7 @@ class PreProcessor:
                 continue
             args_string+=current_char
         
+        
         args_string+=']'
         formated = loads(args_string)
         print(formated)
