@@ -28,7 +28,9 @@ class PreProcessor:
             return comparation == expected
         except IndexError:
             return False
-          
+    
+
+            
     def get_expected_if_is_one_of_expecteds(self,content:str,point:int,expecteds:List[str]):
         for i in expecteds:
             if self.is_string_from_point(content,point,i):
