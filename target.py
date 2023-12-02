@@ -14,4 +14,5 @@ class Soma:
         #comptime:self.embed('x','a.txt')
         v = 30
     #end
+        sempre = False
 #end
