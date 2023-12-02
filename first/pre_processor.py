@@ -40,7 +40,11 @@ class PreProcessor:
         ident_text = ''
         result ='self.text+="'
         inside_comptime = False
-        for i  in range(0,len(content)):
+        i =0
+        while True:
+            if i >=len(content):
+                return result
+            
             current_char = content[i]
 
             if not inside_comptime:
@@ -52,6 +56,7 @@ class PreProcessor:
                     continue
 
                 result+=current_char.replace("\n","\\n")
+                i+=1
                 continue
 
             
@@ -61,14 +66,14 @@ class PreProcessor:
 
                 inside_comptime = False
                 i+=len(end_char)
+
                 continue
 
 
             result+=current_char
-        
+            i+=1
         
             
-        return result
 
 
 
