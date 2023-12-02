@@ -1,5 +1,6 @@
 from .action import Action
 from .action_result import ActionResult
+from .extras import aply_ident
 from typing import List
 from typing import Callable
 from typing import Any
@@ -9,12 +10,13 @@ from json import loads
 class PreProcessor:
 
     def __init__(self) -> None:
-        self._aready_included = []
         self.args = {}
         self.include_name = 'include('
         self.ref_name = 'ref('
         self.embed_name ='embed('
         self.break_char = ')'
+        self.acumulated_ident = 0
+    
     
     def _get_actions(self)->List[Action]:
         return [
@@ -40,45 +42,46 @@ class PreProcessor:
 
 
 
+
     def _include(self,callback_args:list)->str:
         try:
             file = callback_args[0]
         except IndexError:
             raise IndexError('file not passed in args ')
         
+
         result = ''
         with open(file,'r') as arq:
             content = arq.read()
         content_size = len(content)
         i = 0
+
         while True:
             
             
-            if i == content_size:
+            if i >= content_size:
                 break
+            
+            current_char = content[i]
+            
+    
 
-                        
             action = self._get_action_from_point(content,i)
             
             if not action:
-                current_char = content[i]
                 result+=current_char
                 i+=1
                 continue
             
+
             action_result = self._exec_action(action,content,i)
             result+=str(action_result)
             i=action_result.point
 
          
-
-
-        return result
+        return aply_ident(text=result,ident=4)
         
         
-
-
-    
     def _ref(self,callback_args:list)->str:
         try:
             arg_to_print = callback_args[0]
@@ -122,8 +125,7 @@ class PreProcessor:
 
 
     def amalgamate(self,file:str)->str:
-        #generate the first syscall
-        result = self._include([file])
-
+        return self._include([file])
+        
 
 

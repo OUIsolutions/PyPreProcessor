@@ -1,9 +1,7 @@
 
 class Teste:
   
-    include("a.txt")
-
-
+    include("a.py")
     r = ref('a')
 
     x = ref('x')
