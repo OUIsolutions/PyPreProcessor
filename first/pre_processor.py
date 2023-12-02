@@ -83,7 +83,7 @@ class PreProcessor:
         self._cpu.code+=content
         started_identation = self._cpu.acumulated_ident
         content_size = len(content)
-        
+                
 
         while self._syscall_tic(
             content=content,
