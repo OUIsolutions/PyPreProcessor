@@ -56,7 +56,7 @@ class PreProcessor:
                     inside_comptime = True
                     i+=len(self.identifier)
                     continue
-
+                
                 result+=current_char.replace("\n","\\n")
                 i+=1
                 continue
