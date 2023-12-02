@@ -43,13 +43,17 @@ class PreProcessor:
                 return proc
 
 
-    def _syscall(self,started_identation:str):
+    def _syscall(self):
             
-            if self._cpu.point >= content_size:
-                return False 
+            if self._cpu.point >= self._cpu.code_size:
+               self._cpu.output+=aply_ident(
+                        text=self._cpu.output,
+                        ident=self._cpu.acumulated_ident
+                )
+    
             
             
-            current_char = content[i]
+            current_char = self._cpu.code[self._cpu.point]
             if current_char == '\n':
                 self._cpu.acumulated_ident = started_identation
             else:
@@ -82,22 +86,18 @@ class PreProcessor:
         
         self._cpu.code+=content
         self._cpu.code_size+=len(content)
-        started_identation = self._cpu.acumulated_ident
+        while self._syscall():pass 
         
-        while self._syscall(started_identation):pass 
 
-        self._cpu.acumulated_ident = started_identation 
+        
 
-        self._cpu.output+=aply_ident(
-                text=self._cpu.output,
-                ident=self._cpu.acumulated_ident
-        )
-    
+
 
 
     def compile(self,file:str)->str:
-        return self._iNclude([file])
-        
+        with open(file,'r') as arq:
+            self._exec_code(arq.read())
+        return self._cpu.output
 
         
 
