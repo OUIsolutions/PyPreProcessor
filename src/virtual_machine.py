@@ -18,12 +18,11 @@ class VirtualMachine:
         if type == 'ref':
             return self.stack[self.stack_point][element]
 
+    
 
     def _instruction_set(self,values:list):
         var = values[0]
         self.stack[self.stack_point][var] = self._get_value(values[1])
-
-
 
 
     def _syscall(self):
