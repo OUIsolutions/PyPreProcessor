@@ -39,26 +39,27 @@ class PreProcessor:
 
     def _syscall(self):
             
-            if self._registers.point >= self._registers.code_size:
-               self._registers.compilation_result+=aply_ident(
-                        text=self._registers.compilation_result,
-                        ident=0
-                )
+        if self._registers.point >= self._registers.code_size:
+            self._registers.compilation_result+=aply_ident(
+                    text=self._registers.compilation_result,
+                    ident=0
+            )
+            return False
     
+        current_char = self._registers.code[self._registers.point]
+        self._registers.stage+=current_char
+
+
+
+        #if current_char == '\n':
+        #    self._registers.acumulated_ident = started_identation
+        #else:
+        #    self._registers.acumulated_ident+=1
         
-            current_char = self._registers.code[self._registers.point]
-            self._registers.stage+=current_char
-
-
-
-            #if current_char == '\n':
-            #    self._registers.acumulated_ident = started_identation
-            #else:
-            #    self._registers.acumulated_ident+=1
-            
-            action = self._get_action_from_point()
-            
-            
+        
+        self._registers.point+=1
+        return True
+        
 
 
 

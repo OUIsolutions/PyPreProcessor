@@ -37,8 +37,9 @@ def main():
         result = preprocessor.compile(target)
     except Exception as e:
         print(traceback.format_exc())
-
         exit(1)
+    
+        
     
     with open(output,'w') as arq:
         arq.write(result)
