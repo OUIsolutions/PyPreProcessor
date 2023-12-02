@@ -6,7 +6,7 @@ def aply_ident(text:str,ident:int):
         return text
     
     ident_text = '\n'
-    for  i in range(0,ident):
+    for  i in range(0,ident-1):
         ident_text+=' '
     
     lines = text.split('\n')
