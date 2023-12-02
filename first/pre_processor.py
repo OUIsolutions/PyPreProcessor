@@ -19,33 +19,8 @@ class PreProcessor:
         self.break_char = ')'
         self.acumulated_ident = 0
     
-    
-    def _get_actions(self)->List[Action]:
-        return [
-            Action(self._iNclude,self.include_name),
-            Action(self._rEf,self.ref_name),
-        ]
-    
 
-    def _get_action_from_point(self,text:str,start_point:int)->Action or None:
-        actions = self._get_actions()
-        for action in actions:
-            action:Action
-
-            try:
-                end_point = start_point + len(action)
-                possible_action = text[start_point:end_point]
-            except IndexError:
-                continue
-            if possible_action == str(action):
-                return action
-            
-
-    def _dIscard(self,callback_args:list):
-        self.discard = True 
-        
-
-    def _iNclude(self,callback_args:list)->str:
+    def _sycall(self,callback_args:list)->str:
         try:
             file = callback_args[0]
         except IndexError:
@@ -90,7 +65,33 @@ class PreProcessor:
 
         return aply_ident(text=result,ident=self.acumulated_ident)
         
+         
+    def _get_actions(self)->List[Action]:
+        return [
+            Action(self._sycall,self.include_name),
+            Action(self._rEf,self.ref_name),
+        ]
+    
+
+    def _get_action_from_point(self,text:str,start_point:int)->Action or None:
+        actions = self._get_actions()
+        for action in actions:
+            action:Action
+
+            try:
+                end_point = start_point + len(action)
+                possible_action = text[start_point:end_point]
+            except IndexError:
+                continue
+            if possible_action == str(action):
+                return action
+            
+
+    def _dIscard(self,callback_args:list):
+        self.discard = True 
         
+
+
     def _rEf(self,callback_args:list)->str:
         try:
             arg_to_print = callback_args[0]
@@ -135,7 +136,7 @@ class PreProcessor:
 
 
     def compile(self,file:str)->str:
-        return self._iNclude([file])
+        return self._sycall([file])
         
 
         
