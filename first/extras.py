@@ -14,3 +14,8 @@ def aply_ident(text:str,ident:int):
     for line in lines:
         result+=ident_text+line
     return result
+
+
+    
+def convert_content(content:str)->str:
+    return 'nada'
