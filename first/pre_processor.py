@@ -31,8 +31,10 @@ class PreProcessor:
             if not inside_comptime:
                 
 
+                current_char = content[i]
                 
                 if i > len(content) - len(self.identifier):
+                    result+=current_char
                     continue
 
 
@@ -47,7 +49,6 @@ class PreProcessor:
 
 
                 if not is_a_identifier:
-                    current_char = content[i]
                     result+=current_char
 
 
