@@ -1,6 +1,6 @@
-from .action import Action
-from .action_result import ActionResult
-from .extras import aply_ident
+from action import Action
+from action_result import ActionResult
+from extras import aply_ident
 from typing import List
 from typing import Callable
 from typing import Any
@@ -47,7 +47,6 @@ class PreProcessor:
             file = callback_args[0]
         except IndexError:
             raise IndexError('file not passed in args ')
-        print(self.acumulated_ident)
         started_identation = self.acumulated_ident
 
         result = ''
@@ -131,7 +130,7 @@ class PreProcessor:
 
 
     def compile(self,file:str)->str:
-        result = self._include([file])
+        return self._include([file])
         
 
         
