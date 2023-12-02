@@ -82,7 +82,8 @@ class PreProcessor:
             result+=str(action_result)
             i=action_result.point
 
-         
+        self.acumulated_ident = started_identation 
+        
         return aply_ident(text=result,ident=self.acumulated_ident)
         
         
