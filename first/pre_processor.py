@@ -63,7 +63,8 @@ class PreProcessor:
                 i+=len(end_char)
                 continue
 
-            #result+=current_char
+
+            result+=current_char
         
         
             
