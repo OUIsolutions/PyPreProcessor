@@ -29,24 +29,26 @@ class PreProcessor:
         for i  in range(0,len(content)):
 
             if not inside_comptime:
+                
 
-                if i < len(self.identifier):
-                    result+=content[i]
-                    continue
-
+                
                 if i > len(content) - len(self.identifier):
-                    result+=content[i]
                     continue
 
 
                 possible_identifier = content[i:i+len(self.identifier)]
-                print(possible_identifier)
                 is_a_identifier = possible_identifier == self.identifier
+       
+
                 if is_a_identifier:
-                    inside_comptime = True 
+                    inside_comptime = True
+                    i+=len(self.identifier)
+                    continue
+
 
                 if not is_a_identifier:
-                    result+=content[i]
+                    current_char = content[i]
+                    result+=current_char
 
 
             '''

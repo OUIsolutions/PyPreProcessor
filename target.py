@@ -1,5 +1,3 @@
-
-
 r = 30
 
 #comptime:self.include('a.py')
