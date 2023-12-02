@@ -1,4 +1,3 @@
-from extras import create_ident_text
 class PreProcessor:
 
     def __init__(self) -> None:
@@ -8,11 +7,17 @@ class PreProcessor:
         self.endscope ='#end'
         self._text = ''
         
-      
+    @staticmethod
+    def create_ident_text(ident_level:int):    
+        ident_text = ''
+        for  i in range(0,ident_level):
+            ident_text+='    '
+        return ident_text
+
     def generate_content_func(self,content:str)->str:
         lines = content.split('\n')
-        ident_level = 2
-        ident_text = create_ident_text(ident_level)
+        ident_level = 0
+        ident_text = ''
         result =''
         for line in lines:
             if line =='':
@@ -47,7 +52,6 @@ class PreProcessor:
             content = arq.read()
         converted = self.generate_content_func(content)
         exec(converted)
-        
     def compile(self,file:str)->str:
         self.include(file)
         return self._text
