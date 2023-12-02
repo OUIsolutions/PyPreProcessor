@@ -37,6 +37,7 @@ class PreProcessor:
                 continue
 
             result+=f'{ident_text}self.text+="{line}"\n'
+        result+=create_ident_text(ident_level)
         return result
 
 
@@ -45,7 +46,7 @@ class PreProcessor:
         with open(file,'r') as arq:
             content = arq.read()
         converted = self.generate_content_func(content)
-        print(converted)
+        exec(converted)
         
     def compile(self,file:str)->str:
         self.include(file)
