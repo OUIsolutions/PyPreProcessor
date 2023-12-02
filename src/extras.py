@@ -5,7 +5,7 @@ def aply_ident(text:str,ident:int):
     if ident == 0:
         return text
     
-    ident_text = ''
+    ident_text = '\n'
     for  i in range(0,ident):
         ident_text+=' '
     
