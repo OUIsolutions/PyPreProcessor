@@ -18,6 +18,7 @@ class PreProcessor:
         self.break_char = ')'
         self._registers = Registers()
         self._pending_calls:List[PendingCall] = []
+      
     
     
     def _get_procedures(self)->List[BuildInProcedure]:
@@ -55,12 +56,13 @@ class PreProcessor:
             self._pending_calls.append(
                 PendingCall(possible_procedure)
             )
+            
             self._registers.resset_stage()
+            return self._registers.next()
+        
 
 
-
-        self._registers.point+=1
-        return True
+        return self._registers.next()
         
 
 

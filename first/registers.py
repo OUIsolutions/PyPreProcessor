@@ -24,3 +24,7 @@ class Registers:
   
     def add_last_char_to_stage(self):
         self.stage+=self.get_current_char()
+
+    def next(self):
+        self.point+=1
+        return True
