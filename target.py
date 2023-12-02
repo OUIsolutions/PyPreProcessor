@@ -1,7 +1,7 @@
 
 
 #comptime:self.include("a.txt")
-#comptime:if self.args['t'] == 20:
+#comptime:if self.args['t'] == 20: do
 r = 30 
 class Soma:
     def __init__(self) -> None:
@@ -10,8 +10,6 @@ class Soma:
         r == 30
         x:str
         #comptime:self.embed('x','a.txt')
-
+        v = 30
     #end
-
-    
-        
+#end

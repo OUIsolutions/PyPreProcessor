@@ -22,10 +22,11 @@ class PreProcessor:
 
             if striped_line.startswith(self.identifier):
                 code = striped_line[len(self.identifier)::]
+                result+=f'{ident_text}{code}\n'
+
                 if code.endswith(self.start_scope):
                     ident_level+=1
                     ident_text = create_ident_text(ident_level)
-                result+=f'{ident_text}{code}\n'
                 continue
         
             if striped_line == self.endscope:
@@ -42,8 +43,8 @@ class PreProcessor:
         with open(file,'r') as arq:
             content = arq.read()
         converted = self.generate_content_func(content)
+        print(converted)
         
-
     def compile(self,file:str)->str:
         self.include(file)
         return self._text
