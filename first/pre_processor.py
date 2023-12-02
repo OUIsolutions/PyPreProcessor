@@ -11,6 +11,7 @@ class PreProcessor:
 
     def __init__(self) -> None:
         self.args = {}
+        self.discard = False
         self.include_name = 'include('
         self.ref_name = 'ref('
         self.break_char = ')'
@@ -38,9 +39,9 @@ class PreProcessor:
                 return action
             
 
-    
-
-
+    def _dIscard(self,callback_args:list):
+        self.discard = True 
+        
 
     def _iNclude(self,callback_args:list)->str:
         try:
