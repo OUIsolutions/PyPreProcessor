@@ -15,3 +15,12 @@ class Registers:
         self.code = ''
         self.code_size = 0
 
+
+    def resset_stage(self):
+        self.stage = ''
+
+    def get_current_char(self):
+        return self.code[self.point]
+  
+    def add_last_char_to_stage(self):
+        self.stage+=self.get_current_char()

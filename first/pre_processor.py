@@ -5,7 +5,7 @@ from typing import Callable
 from typing import Any
 from json import loads
 from registers import Registers
-
+from pending_call import PendingCall
 class PreProcessor:
 
     def __init__(self) -> None:
@@ -17,7 +17,7 @@ class PreProcessor:
         self.ref_name = '#ref('
         self.break_char = ')'
         self._registers = Registers()
-        self._pending_calls = []
+        self._pending_calls:List[PendingCall] = []
     
     
     def _get_procedures(self)->List[BuildInProcedure]:
@@ -37,6 +37,7 @@ class PreProcessor:
                 return proc
 
 
+
     def _syscall(self):
             
         if self._registers.point >= self._registers.code_size:
@@ -46,20 +47,17 @@ class PreProcessor:
             )
             return False
     
-        current_char = self._registers.code[self._registers.point]
-        self._registers.stage+=current_char
+        self._registers.add_last_char_to_stage()
+
+    
+        possible_procedure = self._get_possible_action(possible_procedure=self._registers.stage)
+        if possible_procedure:
+            self._pending_calls.append(
+                PendingCall(possible_procedure)
+            )
+            self._registers.resset_stage()
 
 
-       
-        
-
-        
-
-        #if current_char == '\n':
-        #    self._registers.acumulated_ident = started_identation
-        #else:
-        #    self._registers.acumulated_ident+=1
-        
 
         self._registers.point+=1
         return True
