@@ -30,6 +30,7 @@ class PreProcessor:
                     ident_text = create_ident_text(ident_level)
                     continue
                 result+=f'{ident_text}{code}\n'
+                continue
 
 
             if striped_line == self.endscope:

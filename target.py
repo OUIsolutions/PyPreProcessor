@@ -1,6 +1,6 @@
 
 
-#comptime:self.include("a.txt")
+#comptime:self.include('a.txt')
 #comptime:if self.args['t'] == 20: do
 r = 30 
 class Soma:
