@@ -2,9 +2,13 @@ from typing import Callable
 
 class Action:
 
-    def __init__(self,action:Callable,name:str) -> None:
+    def __init__(self,action:Callable,name:str,simple_scope_open:bool =False,end_scope:bool=False) -> None:
         self.action = action
         self._name = name
+        self.simple_scope_open = simple_scope_open
+        self.end_scope = end_scope
+    
+    
 
     def call(self,callback_args:list):
         return self.action(callback_args)
