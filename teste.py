@@ -1,25 +1,10 @@
 
-
-from src.virtual_machine import VirtualMachine
-
-
-
+class Teste:
+  
+    include("a.txt")
 
 
-v = VirtualMachine()
+    r = ref('10')
 
-
-v.exec([
-
-
-    ["set","r",["raw",20]],
-    ["set","x",["ref","r"]],
-
-
-    ["if",["raw",10],"==",["raw",10]]
-
-
-    ["endif"]
-])
-
-print(v.stack)
+    x = ref('x')
+    
