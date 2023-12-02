@@ -31,18 +31,18 @@ class PreProcessor:
 
                 if code.endswith(self.start_scope):
                     ident_level+=1
-                    ident_text = create_ident_text(ident_level)
+                    ident_text = self.create_ident_text(ident_level)
                     
                 continue
 
 
             if striped_line == self.endscope:
                 ident_level-=1
-                ident_text = create_ident_text(ident_level)
+                ident_text = self.create_ident_text(ident_level)
                 continue
 
             result+=f'{ident_text}self.text+="{line}"\n'
-        result+=create_ident_text(ident_level)
+        result+=self.create_ident_text(ident_level)
         return result
 
 
