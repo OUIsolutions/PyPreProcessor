@@ -1,10 +1,10 @@
-from first.build_in_procedure import BuildInProcedure
+from build_in_procedure import BuildInProcedure
 from extras import aply_ident
 from typing import List
 from typing import Callable
 from typing import Any
 from json import loads
-from .registers import Registers
+from registers import Registers
 
 class PreProcessor:
 
@@ -49,7 +49,7 @@ class PreProcessor:
             current_char = self._registers.code[self._registers.point]
             self._registers.stage+=current_char
 
-            
+
 
             #if current_char == '\n':
             #    self._registers.acumulated_ident = started_identation
