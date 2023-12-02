@@ -72,8 +72,10 @@ class PreProcessor:
                 ident_level+=1
                 ident_text = self.create_ident_text(ident_level)
 
+            if self.is_string_from_point(content,i,self.endscope):
+                ident_level-=1
+                ident_text = self.create_ident_text(ident_level)
 
-            
 
 
             result+=current_char
