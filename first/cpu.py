@@ -10,4 +10,4 @@ class Cpu:
         self.output =''
         self.text = None
         self.code = ''
-    
+        self.code_size = 0

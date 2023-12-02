@@ -43,7 +43,7 @@ class PreProcessor:
                 return proc
 
 
-    def _syscall_tic(self,content:str, content_size:int,started_identation:str):
+    def _syscall(self,started_identation:str):
             
             if self._cpu.point >= content_size:
                 return False 
@@ -81,17 +81,13 @@ class PreProcessor:
     def _exec_code(self,content:str):
         
         self._cpu.code+=content
+        self._cpu.code_size+=len(content)
         started_identation = self._cpu.acumulated_ident
-        content_size = len(content)
-                
-
-        while self._syscall_tic(
-            content=content,
-            started_identation=started_identation,
-            content_size=content_size
-        ):pass 
+        
+        while self._syscall(started_identation):pass 
 
         self._cpu.acumulated_ident = started_identation 
+
         self._cpu.output+=aply_ident(
                 text=self._cpu.output,
                 ident=self._cpu.acumulated_ident
