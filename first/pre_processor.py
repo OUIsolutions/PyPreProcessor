@@ -122,7 +122,6 @@ class PreProcessor:
            
             
         args_string+=']'        
-        print(args_string)
         
         formated = loads(args_string)
         result = action.call(callback_args=formated)

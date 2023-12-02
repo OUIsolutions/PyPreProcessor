@@ -11,8 +11,8 @@ class PreProcessor:
 
     def __init__(self) -> None:
         self.args = {}
-        self.include_name = ref('_iNclude')
-        self.ref_name = ref('_iNref')
+        self.include_name = ref('iNclude')
+        self.ref_name = ref('rEf')
         self.embed_name ='embed('
         self.break_char = ')'
         self.acumulated_ident = 0
@@ -21,7 +21,7 @@ class PreProcessor:
     def _get_actions(self)->List[Action]:
         return [
             Action(self._iNclude,self.include_name),
-            Action(self._ref,self.ref_name),
+            Action(self._rEf,self.ref_name),
         ]
     
 
@@ -87,7 +87,7 @@ class PreProcessor:
         return aply_ident(text=result,ident=self.acumulated_ident)
         
         
-    def _ref(self,callback_args:list)->str:
+    def _rEf(self,callback_args:list)->str:
         try:
             arg_to_print = callback_args[0]
         except IndexError:
