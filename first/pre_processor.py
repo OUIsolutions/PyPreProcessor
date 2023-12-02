@@ -12,8 +12,10 @@ class PreProcessor:
     def __init__(self) -> None:
         self.args = {}
         self.discard = False
-        self.include_name = 'include('
-        self.ref_name = 'ref('
+    
+        self.include_name = '#include('
+        self.discard_name ='#discard('
+        self.ref_name = '#ref('
         self.break_char = ')'
         self.acumulated_ident = 0
     
