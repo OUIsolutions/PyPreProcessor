@@ -25,10 +25,10 @@ class PreProcessor:
         return [
             Action(self._iNclude,self.include_name),
             Action(self._rEf,self.ref_name),
-            Action(self._dIscard,self.discard_name)
+            Action(self._dIscard,self.discard_name,simple_scope_open=True),
+            Action(self._eNd,self.end_name,end_scope=True)
         ]
     
-
     def _get_action_from_point(self,text:str,start_point:int)->Action or None:
         actions = self._get_actions()
         for action in actions:
