@@ -1,12 +1,6 @@
 
-class Teste:
+declare(r,10)
+declare(r,30)
 
 
-    #declare(a,30)
-    #declare(r,30)
-
-    #if(r,==,30)
-    x =20
-    #end()
-    
     

@@ -11,7 +11,10 @@ class Registers:
 
         self.stage = ''
         self.callback_action:Callable = None
-        self.args =[]
+        self.args =[
+
+            
+        ]
 
 
         self.compilation_result =''

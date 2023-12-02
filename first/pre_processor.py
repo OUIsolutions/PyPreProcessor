@@ -49,13 +49,7 @@ class PreProcessor:
         current_char = self._registers.code[self._registers.point]
         self._registers.stage+=current_char
 
-        try:
-            raw_int = int(self._registers.stage)
-            self._registers.args.append(raw_int)
-            self._registers.stage = ''
-        except TypeError:
-            pass
-
+       
         
 
         
