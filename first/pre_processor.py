@@ -42,7 +42,7 @@ class PreProcessor:
         if is_start_comptime_identfier:
             self._instructions.add_code_block()
             self._inside_comptime = True
-            self._point += len(self.identifier)
+            self._point += len(self.identifier)-1
             return NOT_MOVE_CHAR 
         
         return INCREASE_AND_ADD_CURRENT_CHAR 
@@ -54,6 +54,7 @@ class PreProcessor:
         NOT_MOVE_CHAR = False 
         end_char = self.get_expected_if_is_one_of_expecteds(self._content, self._point, self.end_comptimes)
         is_an_end_comptime:bool = end_char != None
+       
        
         if is_an_end_comptime:
             self._instructions.add_text_block()
@@ -89,7 +90,6 @@ class PreProcessor:
                 self._point+=len(self.endscope)
                 self._instructions.decrease_ident()
                 continue
-
         
             add_char_and_increase_point =  True 
             is_a_normal_text = not self._inside_comptime
