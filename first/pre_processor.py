@@ -83,7 +83,8 @@ class PreProcessor:
         self._inside_comptime = False
         self._current_char = ''
         while True:
-
+            print('---------------------------------')
+            print('current:'+self._current_char)
             if self._point >= len(self._content):
                 return str(self._instructions)
 
@@ -99,6 +100,7 @@ class PreProcessor:
             add_char_and_increase_point =  True 
             is_a_normal_text = not self._inside_comptime
             if is_a_normal_text:
+              print('pegou no handler')
               add_char_and_increase_point = self.handler_normal_text()
                 
             
