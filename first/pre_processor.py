@@ -42,7 +42,7 @@ class PreProcessor:
         if is_start_comptime_identfier:
             self._instructions.add_code_block()
             self._inside_comptime = True
-            self._point += len(self.identifier)-1
+            self._point += len(self.identifier)
             return NOT_MOVE_CHAR 
         
         return INCREASE_AND_ADD_CURRENT_CHAR 
