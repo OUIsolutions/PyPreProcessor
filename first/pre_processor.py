@@ -5,7 +5,7 @@ class PreProcessor:
 
     def __init__(self) -> None:
 
-        self.identifier = '#comp:'
+        self.identifier = 'comp '
         self.start_scope = ':'
         self.endscope = '#end'
         self.end_comptimes = ['\n', '#']
