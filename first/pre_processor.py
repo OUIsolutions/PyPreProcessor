@@ -55,7 +55,6 @@ class PreProcessor:
         end_char = self.get_expected_if_is_one_of_expecteds(self._content, self._point, self.end_comptimes)
         is_an_end_comptime:bool = end_char != None
        
-       
         if is_an_end_comptime:
             self._instructions.add_text_block()
             self._inside_comptime = False
@@ -90,6 +89,7 @@ class PreProcessor:
                 self._point+=len(self.endscope)
                 self._instructions.decrease_ident()
                 continue
+
         
             add_char_and_increase_point =  True 
             is_a_normal_text = not self._inside_comptime
