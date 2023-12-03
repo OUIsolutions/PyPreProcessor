@@ -34,7 +34,7 @@ class PreProcessor:
                 return i
         return None
 
-    def generate_content_func(self, content: str) -> str:
+    def compile(self, content: str) -> str:
         ident_level = 0
         ident_text = ''
         result = 'self.text+="'
@@ -82,9 +82,9 @@ class PreProcessor:
     def include(self, file: str):
         with open(file, 'r') as arq:
             content = arq.read()
-        converted = self.generate_content_func(content)
+        converted = self.compile(content)
         print(converted)
 
-    def compile(self, file: str) -> str:
+    def run(self, file: str) -> str:
         self.include(file)
         return self._text
