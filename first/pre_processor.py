@@ -7,9 +7,9 @@ class PreProcessor:
     def __init__(self) -> None:
 
         self.start_comptime = '#comp:'
-        self.start_scope = ':'
-        self.endscope = '#close'
-        self.end_comptime = '#endcomp'
+        self.start_scope = '#>>'
+        self.endscope = '#<<'
+        self.end_comptime = '#end'
         self._text = ''
         self._instructions:InstructionList = None
         self._point:int  = None
