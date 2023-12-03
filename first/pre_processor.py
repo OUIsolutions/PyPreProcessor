@@ -28,6 +28,16 @@ class PreProcessor:
                 return i
         return None
 
+    def handler_normal_text(self,content:str,current_char:str,instructions:InstructionList):
+        is_start_comptime_identfier =self.is_string_from_point(content, i, self.identifier)
+        if is_start_comptime_identfier:
+            instructions.add_code_block()
+            inside_comptime = True
+            i += len(self.identifier)
+
+        instructions.add_text_to_last_instruction(current_char)
+        
+
     def compile(self, content: str) -> str:
      
         instructions = InstructionList()
@@ -46,18 +56,11 @@ class PreProcessor:
                 instructions.decrease_ident()
                 continue
 
+
             is_a_normal_text = not inside_comptime
             if is_a_normal_text:
+                self.handler_normal_text(content,current_char,instructions)
 
-                is_start_comptime_identfier =self.is_string_from_point(content, i, self.identifier)
-                if is_start_comptime_identfier:
-                    instructions.add_code_block()
-                    inside_comptime = True
-                    i += len(self.identifier)
-                    continue
-
-                instructions.add_text_to_last_instruction(current_char)
-             
 
             if inside_comptime:
                 end_char = self.get_expected_if_is_one_of_expecteds(content, i, self.end_comptimes)
