@@ -5,10 +5,10 @@ class PreProcessor:
 
     def __init__(self) -> None:
 
-        self.identifier = 'comp '
+        self.identifier = '#comp:'
         self.start_scope = ':'
         self.endscope = '#end'
-        self.end_comptimes = ['\n', '#']
+        self.end_comptimes = ['\n','#']
         self._text = ''
         self._instructions:InstructionList = None
         self._point:int  = None
@@ -33,20 +33,6 @@ class PreProcessor:
                 return i
         return None
 
-    def handler_normal_text(self)->bool:
-        INCREASE_AND_ADD_CURRENT_CHAR = True 
-        NOT_MOVE_CHAR = False 
-
-        is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.identifier)
-    
-        if is_start_comptime_identfier:
-            self._instructions.add_code_block()
-            self._inside_comptime = True
-            self._point += len(self.identifier)
-            return NOT_MOVE_CHAR 
-        
-        return INCREASE_AND_ADD_CURRENT_CHAR 
-        
 
     def handler_comptime_text(self)->bool:
 
@@ -61,8 +47,8 @@ class PreProcessor:
             self._inside_comptime = False
             self._point += len(end_char)
             return NOT_MOVE_CHAR 
-        #means its comp:
         
+        #means its : char
         is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
         if is_start_scope:
             self._instructions.add_text_to_last_instruction(self._current_char)
@@ -71,6 +57,23 @@ class PreProcessor:
             return NOT_MOVE_CHAR
         
         return INCREASE_AND_ADD_CURRENT_CHAR 
+
+
+
+    def handler_normal_text(self)->bool:
+        INCREASE_AND_ADD_CURRENT_CHAR = True 
+        NOT_MOVE_CHAR = False 
+
+        is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.identifier)
+    
+        if is_start_comptime_identfier:
+            self._instructions.add_code_block()
+            self._inside_comptime = True
+            self._point += len(self.identifier)
+            return NOT_MOVE_CHAR 
+        
+        return INCREASE_AND_ADD_CURRENT_CHAR 
+        
 
     def compile(self, content: str) -> str:
      
@@ -101,7 +104,6 @@ class PreProcessor:
             
             if self._inside_comptime:
                add_char_and_increase_point = self.handler_comptime_text()
-               pass 
 
             if add_char_and_increase_point:
                 self._instructions.add_text_to_last_instruction(self._current_char)
