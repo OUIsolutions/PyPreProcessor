@@ -9,8 +9,6 @@ r = 30
 if self.t ==  20: #>> 
     
 #end
-
-
 r = 40 
 class Soma:
     def __init__(self) -> None:
