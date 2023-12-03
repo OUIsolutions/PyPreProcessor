@@ -40,33 +40,37 @@ class PreProcessor:
 
             current_char = content[i]
 
-            if self.is_string_from_point(content, i, self.endscope):
+            is_the_end_scope = self.is_string_from_point(content, i, self.endscope)
+            if is_the_end_scope:
                 i+=len(self.endscope)
                 instructions.decrease_ident()
                 continue
 
-            if not inside_comptime:
+            is_a_normal_text = not inside_comptime
+            if is_a_normal_text:
 
-                if self.is_string_from_point(content, i, self.identifier):
+                is_start_comptime_identfier =self.is_string_from_point(content, i, self.identifier)
+                if is_start_comptime_identfier:
                     instructions.add_code_block()
                     inside_comptime = True
                     i += len(self.identifier)
                     continue
 
                 instructions.add_text_to_last_instruction(current_char)
-                i += 1
-                continue
+             
 
-            end_char = self.get_expected_if_is_one_of_expecteds(content, i, self.end_comptimes)
-            if end_char:
-                instructions.add_text_block()
-                inside_comptime = False
-                i += len(end_char)
-                continue
+            if inside_comptime:
+                end_char = self.get_expected_if_is_one_of_expecteds(content, i, self.end_comptimes)
+                if end_char:
+                    instructions.add_text_block()
+                    inside_comptime = False
+                    i += len(end_char)
+                    continue
 
-            if self.is_string_from_point(content, i, self.start_scope):
-                instructions.increase_ident()
-         
+                is_start_scope = self.is_string_from_point(content, i, self.start_scope)
+                if is_start_scope:
+                    instructions.increase_ident()
+            
 
 
             instructions.add_text_to_last_instruction(current_char)
