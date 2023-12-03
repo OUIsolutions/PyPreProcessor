@@ -31,6 +31,9 @@ class InstructionList:
     def __str__(self) -> str:
         result = ''
         for i in self._instructions:
+            generated = str(i)
+            if not generated:
+                continue
             result+=str(i) +"\n"
         return result
 
