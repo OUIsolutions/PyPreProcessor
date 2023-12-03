@@ -9,6 +9,6 @@ class Line:
         for i in range(0, self.ident_level):
             self._ident_text += '    '   
 
-    def add_char(self,char:str):
+    def __add__(self,char:str):
         self._content+=char
 
