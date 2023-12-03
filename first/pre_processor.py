@@ -65,7 +65,6 @@ class PreProcessor:
         
         is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
         if is_start_scope:
-            self._instructions.add_text_to_last_instruction(self._current_char)
             self._instructions.increase_ident()
             self._point+=1
             return NOT_MOVE_CHAR
