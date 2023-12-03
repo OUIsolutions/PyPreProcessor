@@ -42,7 +42,7 @@ class PreProcessor:
         if is_start_comptime_identfier:
             self._instructions.add_code_block()
             self._inside_comptime = True
-            self._point += len(self.identifier)
+            self._point += len(self.identifier)-1
             return NOT_MOVE_CHAR 
         
         return INCREASE_AND_ADD_CURRENT_CHAR 
@@ -65,6 +65,7 @@ class PreProcessor:
         
         is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
         if is_start_scope:
+            self._instructions.add_text_to_last_instruction(self._current_char)
             self._instructions.increase_ident()
             self._point+=1
             return NOT_MOVE_CHAR
