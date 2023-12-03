@@ -108,7 +108,7 @@ class PreProcessor:
 
         converted = self.compile(content)
         self._inside_comptime = False
-        print(converted)
+        exec(converted)
 
 
     def run(self, file: str) -> str:

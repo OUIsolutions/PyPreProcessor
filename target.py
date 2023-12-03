@@ -5,10 +5,11 @@ r = 30
 
 
 
-    #comp: 
+#comp: 
 if self.t ==  20: #>> 
     
-    #end
+#end
+
 
 r = 40 
 class Soma:
