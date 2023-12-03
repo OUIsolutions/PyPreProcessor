@@ -5,27 +5,25 @@ r = 30
 
 
 
-#<py> 
+    #comp:
+    if self.t ==  20: #do
+    r == 30 
+    #endcomp
 
-if self.t ==  20  
- 
- 
-#</py>
 r = 40 
 class Soma:
     def __init__(self) -> None:
         pass
 
-    #<py>
+    #comp:
+
     if self.t ==  20:
-    
-    #</py>
+        
+    #endcomp
         r == '#comp: self.ref(self.a)#'
         v = 30
     
-    #end
-
-    
 
         sempre = False
-#end
+    #close
+#close

@@ -6,10 +6,10 @@ class PreProcessor:
 
     def __init__(self) -> None:
 
-        self.start_comptime = '#<py>'
+        self.start_comptime = '#comp:'
         self.start_scope = ':'
-        self.endscope = '#end'
-        self.end_comptime = '#<py/>'
+        self.endscope = '#close'
+        self.end_comptime = '#endcomp'
         self._text = ''
         self._instructions:InstructionList = None
         self._point:int  = None
