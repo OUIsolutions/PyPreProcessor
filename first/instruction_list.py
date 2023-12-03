@@ -5,8 +5,8 @@ from typing import Callable
 
 class InstructionList:
 
-    def __init__(self) -> None:
-        self._ident_level = 0
+    def __init__(self,ident_level:int) -> None:
+        self._ident_level = ident_level
         self._instructions:List[TextBlock or CodeBlock] = [
             TextBlock(self._ident_level)
         ]
