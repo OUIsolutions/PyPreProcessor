@@ -83,8 +83,6 @@ class PreProcessor:
         self._inside_comptime = False
         self._current_char = ''
         while True:
-            print('---------------------------------')
-            print('current:'+self._current_char)
             if self._point >= len(self._content):
                 return str(self._instructions)
 
