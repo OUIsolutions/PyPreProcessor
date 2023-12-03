@@ -12,6 +12,6 @@ class Soma:
         r == 30
         x:str = #comptime:self.embed('x','a.txt')#
         v = 30
-    #end            
+    #end
         sempre = False
 #end
