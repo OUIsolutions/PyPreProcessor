@@ -106,7 +106,7 @@ class PreProcessor:
                self.handler_comptime_text()
                continue  
 
-    
+
     
     def ref(self,element:Any):
         self._text+=str(element)
