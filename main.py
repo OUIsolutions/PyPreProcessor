@@ -1,5 +1,5 @@
 from first.pre_processor import PreProcessor
 
 p = PreProcessor()
-r = p.compile('target.py')
+r = p.run('target.py')
 print(r)
