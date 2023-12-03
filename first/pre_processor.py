@@ -34,19 +34,16 @@ class PreProcessor:
 
         is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
         
-        #means its \n or  # on end of comptime
         if is_an_end_comptime:
             self._instructions.add_text_block()
             self._inside_comptime = False
             self._point += len(self.end_comptime)
             return  
         
-        #means its : char
         is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
         if is_start_scope:
             self._instructions.add_text_to_last_instruction(self._current_char)
             self._instructions.increase_ident()
-        
             self._point+=1
             return 
         
