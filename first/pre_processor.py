@@ -33,31 +33,34 @@ class PreProcessor:
                 return i
         return None
 
-    def handler_normal_text(self):
+    def handler_normal_text(self)->bool:
         is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.identifier)
     
         if is_start_comptime_identfier:
             self._instructions.add_code_block()
             self._inside_comptime = True
             self._point += len(self.identifier)
-            return
+            return False 
         
-        self._instructions.add_text_to_last_instruction(self._current_char)
-        self._point+=1
+        return True 
+        
 
+    def handler_comptime_text(self)->bool:
 
-    def handler_comptime_text(self):
         end_char = self.get_expected_if_is_one_of_expecteds(self._content, self._point, self.end_comptimes)
-        if end_char:
+        is_an_end_comptime:bool = end_char != None
+
+        if is_an_end_comptime:
             self._instructions.add_text_block()
             self._inside_comptime = False
             self._point += len(end_char)
-            return 
+            return False 
 
         is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
         if is_start_scope:
             self._instructions.increase_ident()
 
+        return True 
 
     def compile(self, content: str) -> str:
      
@@ -79,16 +82,22 @@ class PreProcessor:
                 self._instructions.decrease_ident()
                 continue
 
-
+        
+            add_char_and_increase_point =  True 
             is_a_normal_text = not self._inside_comptime
             if is_a_normal_text:
-                self.handler_normal_text()
+              add_char_and_increase_point = self.handler_normal_text()
                 
-            if self._inside_comptime:
-                self.handler_comptime_text()
-
-
             
+            if self._inside_comptime:
+               add_char_and_increase_point = self.handler_comptime_text()
+
+
+            if add_char_and_increase_point:
+                self._instructions.add_text_to_last_instruction(self._current_char)
+                self._point+=1
+
+    
 
 
     def include(self, file: str):
