@@ -117,12 +117,6 @@ class PreProcessor:
         exec(converted)
 
 
-    def _include(self, file: str):
-        with open(file, 'r') as arq:
-            content = arq.read()
-        converted = self.compile(content)
-        exec(converted)
-
     def run(self, file: str) -> str:
-        self._include(file)
+        self.include(file)
         return self._text
