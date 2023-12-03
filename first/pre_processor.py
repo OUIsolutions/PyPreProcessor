@@ -34,33 +34,40 @@ class PreProcessor:
         return None
 
     def handler_normal_text(self)->bool:
+        INCREASE_AND_ADD_CURRENT_CHAR = True 
+        NOT_MOVE_CHAR = False 
+
         is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.identifier)
     
         if is_start_comptime_identfier:
             self._instructions.add_code_block()
             self._inside_comptime = True
             self._point += len(self.identifier)
-            return False 
+            return NOT_MOVE_CHAR 
         
-        return True 
+        return INCREASE_AND_ADD_CURRENT_CHAR 
         
 
     def handler_comptime_text(self)->bool:
 
+        INCREASE_AND_ADD_CURRENT_CHAR = True 
+        NOT_MOVE_CHAR = False 
         end_char = self.get_expected_if_is_one_of_expecteds(self._content, self._point, self.end_comptimes)
         is_an_end_comptime:bool = end_char != None
-
+       
         if is_an_end_comptime:
             self._instructions.add_text_block()
             self._inside_comptime = False
             self._point += len(end_char)
-            return False 
-
+            return NOT_MOVE_CHAR 
+        
         is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
         if is_start_scope:
+            self._instructions.add_text_to_last_instruction(self._current_char)
             self._instructions.increase_ident()
-
-        return True 
+            return NOT_MOVE_CHAR
+        
+        return INCREASE_AND_ADD_CURRENT_CHAR 
 
     def compile(self, content: str) -> str:
      
