@@ -23,8 +23,8 @@ class InstructionList:
         self._ident_level-=1
         last_instruction_constructor:Callable = self._instructions[-1].__class__
         self._instructions.append(last_instruction_constructor(self._ident_level))
-        
-    def add_text(self,char:str):
+
+    def add_text_to_last_instruction(self,char:str):
         self._instructions[-1].add_text(char)
 
 
