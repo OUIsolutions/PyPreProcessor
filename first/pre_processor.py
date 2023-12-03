@@ -100,7 +100,6 @@ class PreProcessor:
             add_char_and_increase_point =  True 
             is_a_normal_text = not self._inside_comptime
             if is_a_normal_text:
-              print('pegou no handler')
               add_char_and_increase_point = self.handler_normal_text()
                 
             
