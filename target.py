@@ -9,7 +9,8 @@ r = 30
 r = 40 
 class Soma:
     def __init__(self) -> None:
-        pass 
+        pass
+
     #comp: self.include('a.py')
 
     #comp: if self.r == 20:
