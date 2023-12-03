@@ -1,5 +1,7 @@
 
+#comp:if False:
 from .line import Line
+#end
 
 class TextBlock(Line):
 
