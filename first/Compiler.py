@@ -1,4 +1,4 @@
-from .TextBlock import TextBlock
+from .text_block import TextBlock
 
 from typing import List
 
