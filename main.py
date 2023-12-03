@@ -1,14 +1,12 @@
-from first.compiler import Compiler
+from first.compiler import InstructionList
 
 
-c = Compiler()
+c = InstructionList()
 c.add_text("aaaaaaaaaa")
 c.add_text("aaaaaaaaaa")
 c.increase_ident()
 c.add_text("aaaaaaaaaa")
-c.add_text_block()
 c.decrease_ident()
-
 c.add_text("aaaaaaaaaa")
 c.add_text("aaaaaaaaaa")
 

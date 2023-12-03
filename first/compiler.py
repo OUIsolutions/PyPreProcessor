@@ -3,7 +3,7 @@ from .code_block import CodeBlock
 from typing import List
 
 
-class Compiler:
+class InstructionList:
 
     def __init__(self) -> None:
         self._ident_level = 0
@@ -15,10 +15,13 @@ class Compiler:
 
     def increase_ident(self):
         self._ident_level+=1
-    
+        last_instruction_class = self._instructions[-1].__class__
+        self._instructions.append(last_instruction_class(self._ident_level))
+
     def decrease_ident(self):
         self._ident_level-=1
-
+        last_instruction_class = self._instructions[-1].__class__
+        self._instructions.append(last_instruction_class(self._ident_level))
 
     def add_text(self,char:str):
         self._instructions[-1].add_text(char)
