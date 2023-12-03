@@ -49,7 +49,7 @@ class PreProcessor:
             if self.is_string_from_point(content, i, self.endscope):
                 ident_level -= 1
                 ident_text = self.create_ident_text(ident_level)
-                i+=len(self.endscope);
+                i+=len(self.endscope)
                 result+=f'")\n{ident_text}self.text+="'
                 continue
 
