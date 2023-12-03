@@ -111,7 +111,7 @@ class PreProcessor:
     def include(self, file: str):
         with open(file, 'r') as arq:
             content = arq.read()
-        converted = self.compile(content)
+        converted = self.compile(content,self._instructions._ident_level)
         exec(converted)
 
 
