@@ -8,4 +8,4 @@ class CodeBlock(Line):
 
         if formated_conent == '':
             return ''
-        return f'{self._ident_text}{formated_conent}\n'
+        return f'{self._ident_text}{formated_conent}'

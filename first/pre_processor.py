@@ -6,10 +6,10 @@ class PreProcessor:
 
     def __init__(self) -> None:
 
-        self.identifier = '#comp:'
+        self.start_comptime = '#<py>'
         self.start_scope = ':'
         self.endscope = '#end'
-        self.end_comptimes = ['\n','#']
+        self.end_comptime = '#<py/>'
         self._text = ''
         self._instructions:InstructionList = None
         self._point:int  = None
@@ -28,23 +28,17 @@ class PreProcessor:
         except IndexError:
             return False
 
-    def get_expected_if_is_one_of_expecteds(self, content: str, point: int, expecteds: List[str]):
-        for i in expecteds:
-            if self.is_string_from_point(content, point, i):
-                return i
-        return None
 
 
     def handler_comptime_text(self)->bool:
 
-        end_char = self.get_expected_if_is_one_of_expecteds(self._content, self._point, self.end_comptimes)
-        is_an_end_comptime:bool = end_char != None
+        is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
         
         #means its \n or  # on end of comptime
         if is_an_end_comptime:
             self._instructions.add_text_block()
             self._inside_comptime = False
-            self._point += len(end_char)
+            self._point += len(self.end_comptime)
             return  
         
         #means its : char
@@ -52,7 +46,7 @@ class PreProcessor:
         if is_start_scope:
             self._instructions.add_text_to_last_instruction(self._current_char)
             self._instructions.increase_ident()
-            
+        
             self._point+=1
             return 
         
@@ -63,12 +57,12 @@ class PreProcessor:
 
     def handler_normal_text(self)->bool:
 
-        is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.identifier)
+        is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.start_comptime)
     
         if is_start_comptime_identfier:
             self._instructions.add_code_block()
             self._inside_comptime = True
-            self._point += len(self.identifier)+1
+            self._point += len(self.start_comptime)+1
             return  
         
 
