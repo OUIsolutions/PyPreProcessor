@@ -52,6 +52,7 @@ class PreProcessor:
         if is_start_scope:
             self._instructions.add_text_to_last_instruction(self._current_char)
             self._instructions.increase_ident()
+            
             self._point+=1
             return 
         
