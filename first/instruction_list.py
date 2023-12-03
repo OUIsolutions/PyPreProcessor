@@ -37,4 +37,7 @@ class InstructionList:
     def add_text_block(self):
         self._instructions.append(TextBlock(self._ident_level))
 
-    
+ 
+    def add_code_block(self):
+        self._instructions.append(CodeBlock(self._ident_level))
+   

@@ -1,4 +1,4 @@
-from first.compiler import InstructionList
+from first.instruction_list import InstructionList
 
 
 c = InstructionList()

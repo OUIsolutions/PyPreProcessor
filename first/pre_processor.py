@@ -1,5 +1,5 @@
 from typing import List
-
+from .instruction_list import InstructionList
 
 class PreProcessor:
 
@@ -29,48 +29,47 @@ class PreProcessor:
         return None
 
     def compile(self, content: str) -> str:
-        ident_level = 0
-        ident_text = ''
-        result = 'self.text+="'
+     
+        instructions = InstructionList()
+
         inside_comptime = False
         i = 0
         while True:
             if i >= len(content):
-                return result
+                return str(instructions)
 
             current_char = content[i]
 
             if self.is_string_from_point(content, i, self.endscope):
-                ident_level -= 1
-                ident_text = self.create_ident_text(ident_level)
                 i+=len(self.endscope)
-                result+=f'"\n{ident_text}self.text+="'
+                instructions.decrease_ident()
                 continue
 
             if not inside_comptime:
 
                 if self.is_string_from_point(content, i, self.identifier):
-                    result += f'"\n{ident_text}'
+                    instructions.add_code_block()
                     inside_comptime = True
                     i += len(self.identifier)
                     continue
 
-                result += current_char.replace("\n", "\\n")
+                instructions.add_text_to_last_instruction(current_char)
                 i += 1
                 continue
 
             end_char = self.get_expected_if_is_one_of_expecteds(content, i, self.end_comptimes)
             if end_char:
-                result += f'\n{ident_text}self.text+="'
+                instructions.add_text_block()
                 inside_comptime = False
                 i += len(end_char)
                 continue
 
             if self.is_string_from_point(content, i, self.start_scope):
-                ident_level += 1
-                ident_text = self.create_ident_text(ident_level)
+                instructions.increase_ident()
+         
 
-            result += current_char
+
+            instructions.add_text_to_last_instruction(current_char)
             i += 1
 
     def include(self, file: str):
