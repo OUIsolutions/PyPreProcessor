@@ -50,7 +50,7 @@ class PreProcessor:
                 ident_level -= 1
                 ident_text = self.create_ident_text(ident_level)
                 i+=len(self.endscope)
-                result+=f'")\n{ident_text}self.text+="'
+                result+=f'"\n{ident_text}self.text+="'
                 continue
 
             if not inside_comptime:
