@@ -12,4 +12,4 @@ class TextBlock(Line):
         if formated_content == '':
             return ''
         
-        return f'{self._ident_text}self.text+="{formated_content}"'
+        return f'{self._ident_text}self._text+="{formated_content}"'
