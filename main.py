@@ -1,13 +1,5 @@
-from first.instruction_list import InstructionList
+from first.pre_processor import PreProcessor
 
-
-c = InstructionList()
-c.add_text_to_last_instruction("aaaaaaaaaa")
-c.add_text_to_last_instruction("aaaaaaaaaa")
-c.increase_ident()
-c.add_text_to_last_instruction("aaaaaaaaaa")
-c.decrease_ident()
-c.add_text_to_last_instruction("aaaaaaaaaa")
-c.add_text_to_last_instruction("aaaaaaaaaa")
-
-print(c)
+p = PreProcessor()
+r = p.compile('target.py')
+print(r)
