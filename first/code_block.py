@@ -6,6 +6,7 @@ class CodeBlock(Line):
     def __str__(self) -> str:
         lines = self._content.split('\n')
         lines = list(map(lambda l: l.strip(),lines))
+        lines = list(filter(lambda l: l,lines))
         formated_conent = '\n'.join(lines)
 
         if formated_conent == '':
