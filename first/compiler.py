@@ -20,15 +20,15 @@ class Compiler:
         self._ident_level-=1
 
 
-    def __add__(self,char:str):
-        self._instructions[-1]+=char
+    def add_text(self,char:str):
+        self._instructions[-1].add_text(char)
 
 
     def __str__(self) -> str:
         result = ''
         for i in self._instructions:
             result+=str(i) +"\n"
-        
+        return result
 
     def add_text_block(self):
         self._instructions.append(TextBlock(self._ident_level))
