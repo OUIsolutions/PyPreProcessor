@@ -7,7 +7,9 @@ class Compiler:
 
     def __init__(self) -> None:
         self._ident_level = 0
-        self._instructions:List[TextBlock or CodeBlock] = []
+        self._instructions:List[TextBlock or CodeBlock] = [
+            TextBlock(self._ident_level)
+        ]
     
 
 

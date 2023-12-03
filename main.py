@@ -1,1 +1,4 @@
-from first.compiler impor
+from first.compiler import Compiler
+
+
+c =Compiler()
