@@ -1,4 +1,5 @@
 from typing import List
+from typing import Any
 from .instruction_list import InstructionList
 
 class PreProcessor:
@@ -17,8 +18,8 @@ class PreProcessor:
         self._current_char:str = None
         # args
         self.t = 20
-        self.r = 30
-
+        self.r = 20
+        self.a = "funcionou"
 
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
@@ -107,6 +108,8 @@ class PreProcessor:
 
     
     
+    def ref(self,element:Any):
+        self._text+=str(element)
 
     def include(self, file: str):
         with open(file, 'r') as arq:
