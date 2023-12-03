@@ -35,6 +35,7 @@ class PreProcessor:
 
 
     def handler_comptime_text(self)->bool:
+
         end_char = self.get_expected_if_is_one_of_expecteds(self._content, self._point, self.end_comptimes)
         is_an_end_comptime:bool = end_char != None
         
@@ -65,7 +66,7 @@ class PreProcessor:
         if is_start_comptime_identfier:
             self._instructions.add_code_block()
             self._inside_comptime = True
-            self._point += len(self.identifier)
+            self._point += len(self.identifier)+1
             return  
         
 
