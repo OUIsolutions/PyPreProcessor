@@ -4,7 +4,9 @@ from .line import Line
 class CodeBlock(Line):
 
     def __str__(self) -> str:
-        formated_conent = self._content.strip()
+        lines = self._content.split('\n')
+        lines = list(map(lambda l: l.strip(),lines))
+        formated_conent = '\n'.join(lines)
 
         if formated_conent == '':
             return ''
