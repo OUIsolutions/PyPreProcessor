@@ -89,7 +89,7 @@ class PreProcessor:
 
         while True:
             if compiler_props._point >= len(compiler_props._content):
-                
+
                 return str(compiler_props._instructions)
 
             compiler_props._current_char = compiler_props._content[compiler_props._point]
@@ -147,7 +147,6 @@ class PreProcessor:
         formated_content = aply_ident(content,self._normal_text_ident)
     
         self.exec(formated_content)
-
  
 
     def run(self, file: str) -> str:
