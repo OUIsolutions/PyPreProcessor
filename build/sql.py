@@ -6,12 +6,10 @@ from PyPreProcessor import PreProcessor
 
 TEMPLATE = 'templates/insert.sql'
 
-#comp: if not self.internal: #>>
-
+#comp: if not self.internal: #>>#end 
 OUTPUT = "query.sql"
 #<<  
 
-#end 
 
 #comp:if self.internal: #>> #end 
 OUTPUT = "out.txt"

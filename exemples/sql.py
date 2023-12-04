@@ -7,6 +7,9 @@ from PyPreProcessor import PreProcessor
 TEMPLATE = 'templates/insert.sql'
 
  
+OUTPUT = "query.sql"
+  
+
 
  
 
