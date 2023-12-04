@@ -41,7 +41,7 @@ class PreProcessor:
 
     def handler_comptime_text(self,compiler_props:CompilerProps)->bool:
 
-        is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
+        is_an_end_comptime =self.is_string_from_point(self._content, compiler_props._point, self.end_comptime)
         
         if is_an_end_comptime:
             compiler_props._instructions.add_text_block()
@@ -49,13 +49,13 @@ class PreProcessor:
             compiler_props._point += len(self.end_comptime)
             return  
         
-        is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
+        is_start_scope = self.is_string_from_point(self._content, compiler_props._point, self.start_scope)
         if is_start_scope:
             compiler_props._instructions.increase_code_ident()
             compiler_props._point+=len(self.start_scope)
             return 
         
-        compiler_props._instructions.add_text_to_last_instruction(self._current_char)
+        compiler_props._instructions.add_text_to_last_instruction(compiler_props._current_char)
         compiler_props._point+=1
 
 
@@ -86,7 +86,7 @@ class PreProcessor:
     def compile(self) -> str:
      
         compiler_props = CompilerProps()
-
+        compiler_props._content = self._content
         while True:
             if compiler_props._point >= len(compiler_props._content):
 
@@ -128,6 +128,7 @@ class PreProcessor:
     def exec(self,content:str):
         self._content = content
         converted = self.compile()
+        #print(converted)
         self._inside_comptime = False  
         try:
             exec(converted)
