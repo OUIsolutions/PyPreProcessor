@@ -16,9 +16,65 @@ import traceback
 
 
 
-#comp#: self.include("src/extras.py") #end 
-#comp#: self.include("src/line.py") #end 
-#comp#: self.include("src/code_block.py") #end 
+
+
+
+def aply_ident(text:str,ident:int):
+    if ident == 0:
+        return text
+    
+    ident_text = '\n'
+    for  i in range(0,ident-1):
+        ident_text+=' '
+    
+    lines = text.split('\n')
+    result = ''
+    for line in lines:
+        result+=ident_text+line
+    return result
+
+
+
+
+
+ 
+
+
+class Line:
+
+
+    def __init__(self,ident_level:int) -> None:
+        self._content = ''
+        self._ident_text = ''
+        for i in range(0, ident_level):
+            self._ident_text += '    '   
+
+    def add_text(self,char:str):
+        self._content+=char
+
+ 
+
+
+
+
+
+
+
+
+
+class CodeBlock(Line):
+
+    def __str__(self) -> str:
+        lines = self._content.split('\n')
+        lines = list(map(lambda l: l.strip(),lines))
+        lines = list(filter(lambda l: l,lines))
+        formated_content = ''
+        for i in lines:
+            formated_content+=f'\n{self._ident_text}{i}' 
+
+        if formated_content == '':
+            return ''
+        return formated_content 
 
 
  
