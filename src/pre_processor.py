@@ -28,6 +28,7 @@ class PreProcessor:
         self._normal_text_ident = 0 
         self._previews_file_text_ident = 0
         self._inside_comptime = False
+        self._text = ''
 
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
@@ -134,6 +135,7 @@ class PreProcessor:
             print('==================================================')  
             print(format_exc(e))   
             raise e 
+        
         
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
