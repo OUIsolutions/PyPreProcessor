@@ -12,7 +12,7 @@ OUTPUT = "query.sql"
 
 
 #comp:if self.internal: #>> #end 
-OUTPUT = "out.html"
+OUTPUT = "out.txt"
 #<< 
 
 
