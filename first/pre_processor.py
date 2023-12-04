@@ -76,7 +76,12 @@ class PreProcessor:
 
     def compile(self) -> str:
      
-  
+        self._instructions = InstructionList()
+        self._point = 0
+        self._inside_comptime = False
+        self._current_char:str  = ''
+        self._text_ident = 0 
+
         while True:
             if self._point >= len(self._content):
                 return str(self._instructions)
@@ -111,8 +116,9 @@ class PreProcessor:
     def _generate(self,text:bytes):
         self._text+=text.decode('utf-8')
 
-    def include(self, file: str):
-        self._resset_state()
+
+    def include(self, file: str):       
+         
         with open(file, 'r') as arq:
             self._content = arq.read()
         
@@ -124,5 +130,6 @@ class PreProcessor:
 
 
     def run(self, file: str) -> str:
+        self._resset_state()
         self.include(file)
         return self._text
