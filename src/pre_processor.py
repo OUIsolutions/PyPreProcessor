@@ -128,6 +128,7 @@ class PreProcessor:
     def _generate(self,text:bytes):
         self._text+=text.decode('utf-8')
 
+
     def exec(self,content:str):
         self._content = content
         converted = self.compile()

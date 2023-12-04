@@ -1,5 +1,6 @@
-
+#comp: if False: #>>  #end
 from line import Line
+#<<
 
 class CodeBlock(Line):
 
