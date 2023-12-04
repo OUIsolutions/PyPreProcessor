@@ -15,13 +15,15 @@ class Soma:
         pass
 
     #comp:
-    if self.t ==  20:  #>>     
+    for i in self.lista: #>>     
     #end
 
-        r == "#comp: self.ref(self.a)   #end"
+        r == "#comp: self.ref(i)   #end"
         v = 30
-    
 
         sempre = False
     #<<
+
+
+
 #<<

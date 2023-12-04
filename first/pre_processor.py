@@ -20,7 +20,7 @@ class PreProcessor:
         self.t = 20
         self.r = 20
         self.a = '"#comp: self.aaaaaaaaa #end'
-
+        self.lista = [1,2,3]
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
             comparation = content[point:point + len(expected)]
@@ -101,6 +101,7 @@ class PreProcessor:
     
     def ref(self,element:Any):
         self._text+=str(element)
+
 
     def _generate(self,text:bytes):
         self._text+=text.decode('utf-8')
