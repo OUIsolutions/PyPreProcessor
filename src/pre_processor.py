@@ -78,8 +78,8 @@ class PreProcessor:
             return  
         
 
-        self._instructions.add_text_to_last_instruction(self._current_char)
-        self._point+=1
+        compiler_props._instructions.add_text_to_last_instruction(self._current_char)
+        compiler_props._point+=1
 
         
 
@@ -89,6 +89,7 @@ class PreProcessor:
 
         while True:
             if compiler_props._point >= len(compiler_props._content):
+                
                 return str(compiler_props._instructions)
 
             compiler_props._current_char = compiler_props._content[compiler_props._point]
