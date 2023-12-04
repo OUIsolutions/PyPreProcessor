@@ -12,8 +12,8 @@ TEMPLATE = 'templates/insert.sql'
 
  
 
-
  
+
 
 p = PreProcessor()
 p.username = 'Username'
