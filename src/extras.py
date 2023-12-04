@@ -17,11 +17,5 @@ def aply_ident(text:str,ident:int):
 
 
 
-def create_ident_text(ident_level:int):    
-    ident_text = ''
-    for  i in range(0,ident_level):
-        ident_text+='    '
-    return ident_text
 
-    
 
