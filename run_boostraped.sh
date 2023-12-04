@@ -1,2 +1,2 @@
 
-python3 PyPreProcessor.py  src/main.py PyPreProcessor.py 
+python3 PyPreProcessor.py  smain.py PyPreProcessor.py 
