@@ -13,17 +13,9 @@ class PreProcessor:
         self.start_comptime = '#comp$:'.replace('$','')
         self.start_scope = '#>$>'.replace('$','')
         self.endscope = '#<$<'.replace('$','')
-        self.end_comptime = '#en$d'.replace('$','')
-        
-
-        
+        self.end_comptime = '#en$d'.replace('$','')        
         self._resset_state()
-        # args
-        self.t = 20
-        self.r = 20
-        self.a = '"#comp: self.aaaaaaaaa #end'
-        self.lista = [1,2,3]
-
+        
 
     def _resset_state(self):
         self._text = ''
@@ -151,6 +143,7 @@ class PreProcessor:
             self.exec(formated_content)
         except Exception as e:
             print(formated_content)
+            print('==================================================')
             raise e
 
 
