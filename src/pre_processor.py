@@ -135,7 +135,7 @@ class PreProcessor:
         except Exception as e:
             print(converted)
             print('==================================================')  
-            print(format_exc(e))   
+            print(format_exc())   
             raise e 
         
         
