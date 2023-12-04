@@ -75,7 +75,7 @@ class PreProcessor:
         if is_start_comptime_identfier:
             self._instructions.add_code_block(self._normal_text_ident)
             self._inside_comptime = True
-            self._point += len(self.start_comptime)+1
+            self._point += len(self.start_comptime)
             return  
         
 

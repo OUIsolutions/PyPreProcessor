@@ -19,7 +19,22 @@ import traceback
 #comp#: self.include("src/extras.py") #end 
 #comp#: self.include("src/line.py") #end 
 #comp#: self.include("src/code_block.py") #end 
+
+
  
+
+
+class TextBlock(Line):
+
+    def __init__(self, ident_level: int) -> None:
+        super().__init__(ident_level)
+
+    def __str__(self) -> str:
+   
+        if self._content == '':
+            return ''
+        formated_content  = self._content.encode('utf-8')
+        return f'{self._ident_text}self._generate({formated_content})' 
 from text_block import TextBlock
 from code_block import CodeBlock
 from typing import List
@@ -144,7 +159,7 @@ class PreProcessor:
         if is_start_comptime_identfier:
             self._instructions.add_code_block(self._normal_text_ident)
             self._inside_comptime = True
-            self._point += len(self.start_comptime)+1
+            self._point += len(self.start_comptime)
             return  
         
 
