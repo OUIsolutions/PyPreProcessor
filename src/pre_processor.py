@@ -132,6 +132,11 @@ class PreProcessor:
         self._inside_comptime = False  
         try:
             exec(converted)
+
+        except AttributeError as e:
+            print('args not found',e.args[0])
+            raise e 
+        
         except Exception as e:
             print(converted)
             print('==================================================')  
