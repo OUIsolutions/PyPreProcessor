@@ -8,8 +8,6 @@ INSERT INTO
 #comp:if not self.is_root: #>> #end 
      users 
 #<<
-
-
 (username, email, password) 
 VALUES (
         '#comp: self.ref(self.username) #end', 
