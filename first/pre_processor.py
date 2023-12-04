@@ -25,8 +25,9 @@ class PreProcessor:
         self._content:str =''
         self._inside_comptime = False
         self._current_char:str  = ''
-        self._text_ident = 0 
-
+        #these is the ident of the text, not the comptime text
+        self._normal_text_ident = 0 
+        self._previews_file_text_ident = 0
 
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
@@ -59,6 +60,12 @@ class PreProcessor:
 
 
     def handler_normal_text(self)->bool:
+        if self._current_char == '\n':
+            self._normal_text_ident == self._previews_file_text_ident
+
+        if self._current_char == ' ':
+            self._normal_text_ident+=1
+
 
         is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.start_comptime)
     
@@ -80,15 +87,13 @@ class PreProcessor:
         self._point = 0
         self._inside_comptime = False
         self._current_char:str  = ''
-        self._text_ident = 0 
 
         while True:
             if self._point >= len(self._content):
                 return str(self._instructions)
 
             self._current_char = self._content[self._point]
-            if self._current_char == '\n':
-                self._text_ident+=1
+
             
             is_the_end_scope = self.is_string_from_point(self._content, self._point, self.endscope)
             if is_the_end_scope:
@@ -121,7 +126,8 @@ class PreProcessor:
         converted = self.compile()
         self._inside_comptime = False  
         exec(converted)
-  
+        self._previews_file_text_ident = self._normal_text_ident
+        
 
     def include(self, file: str):       
         with open(file, 'r') as arq:
