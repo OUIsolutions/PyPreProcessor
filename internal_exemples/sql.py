@@ -15,9 +15,6 @@ OUTPUT = "query.sql"
 OUTPUT = "out.txt"
 #<< #end 
 
-
-
-
 p = PreProcessor()
 p.username = 'Username'
 p.email = 'myemail@gamil.com'
@@ -27,4 +24,10 @@ p.is_root = False
 result = p.run(TEMPLATE)
 with open(OUTPUT,'w') as arq:
     arq.write(result)
-    
+
+
+#comp:if self.internal: #>> 
+from shutil import copy
+copy(TEMPLATE,'before.txt')
+#<< #end 
+

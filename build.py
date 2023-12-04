@@ -1,6 +1,7 @@
 from shutil import copy 
 from os import system
 from os import listdir
+from os import remove
 from PyPreProcessor import PreProcessor
 
 #boostraping itself 
@@ -16,6 +17,8 @@ for e in exemples:
     current = f'internal_exemples/{e}'
     if e == 'PyPreProcessor.py':
         continue
+    if not e.endswith('.py'):
+        continue
 
     p = PreProcessor()
     p.internal = False 
@@ -23,7 +26,16 @@ for e in exemples:
         'file':p.run(current),
     }
     system(f'python3 {current}')
-    
+    with open('before.txt','r') as arq:
+        data['before'] = arq.read()
+
+    with open('out.txt','r') as arq:
+        data['out'] = arq.read()
+    remove('before.txt')
+    remove('out.txt')
+    main_processor.files[e] = data
+
+
 
 
   
