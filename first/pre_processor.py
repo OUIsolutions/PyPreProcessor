@@ -122,7 +122,7 @@ class PreProcessor:
         self._inside_comptime = False  
         exec(converted)
   
-  
+
     def include(self, file: str):       
         with open(file, 'r') as arq:
              self.exec(arq.read())
