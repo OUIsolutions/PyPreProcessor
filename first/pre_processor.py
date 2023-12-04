@@ -116,16 +116,16 @@ class PreProcessor:
     def _generate(self,text:bytes):
         self._text+=text.decode('utf-8')
 
-
-    def include(self, file: str):       
-         
-        with open(file, 'r') as arq:
-            self._content = arq.read()
-        
+    def exec(self,content:str):
+        self._content = content
         converted = self.compile()
-        self._inside_comptime = False
-
+        self._inside_comptime = False  
         exec(converted)
+  
+  
+    def include(self, file: str):       
+        with open(file, 'r') as arq:
+             self.exec(arq.read())
 
 
 
