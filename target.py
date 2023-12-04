@@ -15,10 +15,11 @@ class Soma:
         pass
 
     #comp:
-    for i in self.lista: #>>     
+    self.include("a.py")
+    if True :#>>     
     #end
 
-        r == "#comp: self.ref(i)   #end"
+        r == "#comp: self.ref(self.a)   #end"
         v = 30
 
         sempre = False
