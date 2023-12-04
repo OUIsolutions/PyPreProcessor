@@ -18,9 +18,9 @@
         </tr>
             #comp: for user in self.users: #>> #end 
             <tr>
-                comp:for key in user: #>> #end 
+                comp:for key in keys: #>> #end 
                         comp:value = user[key]#end 
-                        <th>#comp:self.ref(value)#end</th>
+                        comp:print(value)#end
                 #<<      
             </tr>
         #<<
