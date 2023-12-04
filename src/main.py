@@ -25,6 +25,8 @@ from pre_processor import PreProcessor
 #comp: self.include("src/code_block.py") #end 
 #comp: self.include("src/text_block.py") #end 
 #comp: self.include("src/instruction_list.py") #end 
+#comp: self.include("src/compiler_props.py") #end 
+
 #comp: self.include("src/pre_processor.py") #end 
 
 
