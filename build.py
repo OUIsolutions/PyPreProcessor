@@ -23,7 +23,7 @@ for e in exemples:
     p = PreProcessor()
     p.internal = False 
     data = {
-        'file':p.run(current),
+        'content':p.run(current),
     }
     system(f'python3 {current}')
     with open('before.txt','r') as arq:
