@@ -132,7 +132,8 @@ class PreProcessor:
         converted = self.compile()
         self._inside_comptime = False  
         exec(converted)
-        
+        print(converted)
+        print('==================================================')     
 
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
@@ -143,8 +144,7 @@ class PreProcessor:
         formated_content = aply_ident(content,self._normal_text_ident)
         try:     
             self.exec(formated_content)
-            print(formated_content)
-            print('==================================================')
+
         except Exception as e:
             print(formated_content)
             print('==================================================')
