@@ -20,12 +20,13 @@ class PreProcessor:
 
     def _resset_state(self):
         self._text = ''
-        self._instructions:InstructionList = None
-        self._point:int  = None
-        self._content:str = None 
-        self._inside_comptime:bool = None
-        self._current_char:str = None
+        self._instructions = InstructionList()
+        self._point = 0
+        self._content:str =''
+        self._inside_comptime = False
+        self._current_char:str  = ''
         self._text_ident = 0 
+
 
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
@@ -73,13 +74,9 @@ class PreProcessor:
 
         
 
-    def compile(self, content: str,ident_level:int=0) -> str:
+    def compile(self) -> str:
      
-        self._instructions  = InstructionList(ident_level)
-        self._point = 0
-        self._content =content
-        self._inside_comptime = False
-        self._current_char = ''
+  
         while True:
             if self._point >= len(self._content):
                 return str(self._instructions)
@@ -115,14 +112,17 @@ class PreProcessor:
         self._text+=text.decode('utf-8')
 
     def include(self, file: str):
+        self._resset_state()
         with open(file, 'r') as arq:
-            content = arq.read()
-        converted = self.compile(content)
+            self._content = arq.read()
+        
+        converted = self.compile()
         self._inside_comptime = False
+
         exec(converted)
 
 
+
     def run(self, file: str) -> str:
-        self._resset_state()
         self.include(file)
         return self._text
