@@ -1,7 +1,7 @@
 from text_block import TextBlock
 from code_block import CodeBlock
 from typing import List
-
+from typing import Callable
 class InstructionList:
 
     def __init__(self) -> None:
@@ -18,7 +18,6 @@ class InstructionList:
 
     def decrease_code_ident(self):
         self._ident_level-=1
-
 
     def add_text_to_last_instruction(self,char:str):
         self._instructions[-1].add_text(char)

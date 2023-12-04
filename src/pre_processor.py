@@ -96,10 +96,7 @@ class PreProcessor:
             if self._point >= len(self._content):
                 return str(self._instructions)
 
-
-
             self._current_char = self._content[self._point]
-
             
             is_the_end_scope = self.is_string_from_point(self._content, self._point, self.endscope)
             if is_the_end_scope:
@@ -131,7 +128,7 @@ class PreProcessor:
         self._content = content
         converted = self.compile()
         self._inside_comptime = False  
-        exec(converted)
+        #exec(converted)
         print(converted)
         print('==================================================')     
 
