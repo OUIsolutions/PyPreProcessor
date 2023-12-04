@@ -1,15 +1,18 @@
 
-from src import PreProcessor
 
-#if self.internal: >> 
+
+from PyPreProcessor import PreProcessor
+
+#comp:if self.internal: #>> 
 TEMPLATE = '../templates/insert.sql'
 OUTPUT = "out.txt"
-#end 
+#<< #end 
 
-#if not self.internal: >> 
+#comp:if not self.internal: #>> 
 TEMPLATE = 'templates/insert.sql'
 OUTPUT = "query.sql"
-#end 
+
+#<< #end 
 
 p = PreProcessor()
 p.username = 'Username'
