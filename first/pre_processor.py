@@ -21,6 +21,7 @@ class PreProcessor:
         self.r = 20
         self.a = '"#comp: self.aaaaaaaaa #end'
         self.lista = [1,2,3]
+
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
             comparation = content[point:point + len(expected)]
@@ -109,7 +110,6 @@ class PreProcessor:
     def include(self, file: str):
         with open(file, 'r') as arq:
             content = arq.read()
-
         converted = self.compile(content)
         self._inside_comptime = False
         exec(converted)

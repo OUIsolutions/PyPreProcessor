@@ -21,10 +21,7 @@ class Soma:
 
         r == "#comp: self.ref(self.a)   #end"
         v = 30
-
         sempre = False
     #<<
-
-
 
 #<<
