@@ -1,5 +1,5 @@
 #comp: if False: #>>
-from instruction_list import InstructionList
+from .instruction_list import InstructionList
 #<< #end
 
 

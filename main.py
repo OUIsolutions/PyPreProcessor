@@ -14,11 +14,8 @@ from traceback import format_exc
 
 
 #comp: if False: #>>  
-from pre_processor import PreProcessor
+from src  import PreProcessor
 #<< #end
-
-
-
 
 
 #comp: self.include("src/extras.py") #end 

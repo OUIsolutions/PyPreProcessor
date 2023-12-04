@@ -1,5 +1,5 @@
 
-from PyPreProcessor import PreProcessor
+from src import PreProcessor
 
 #if self.internal: >> 
 TEMPLATE = '../templates/insert.sql'

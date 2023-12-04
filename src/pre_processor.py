@@ -2,10 +2,10 @@
 #comp: if False: #>>  #end
 from typing import List
 from typing import Any
-from instruction_list import InstructionList
-from extras import aply_ident
+from .instruction_list import InstructionList
+from .extras import aply_ident
 from traceback import format_exc
-from compiler_props import CompilerProps 
+from .compiler_props import CompilerProps 
 #<< 
 
 
