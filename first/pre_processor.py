@@ -10,17 +10,22 @@ class PreProcessor:
         self.start_scope = '#>>'
         self.endscope = '#<<'
         self.end_comptime = '#end'
+        self._resset_state()
+        # args
+        self.t = 20
+        self.r = 20
+        self.a = '"#comp: self.aaaaaaaaa #end'
+        self.lista = [1,2,3]
+
+
+    def _resset_state(self):
         self._text = ''
         self._instructions:InstructionList = None
         self._point:int  = None
         self._content:str = None 
         self._inside_comptime:bool = None
         self._current_char:str = None
-        # args
-        self.t = 20
-        self.r = 20
-        self.a = '"#comp: self.aaaaaaaaa #end'
-        self.lista = [1,2,3]
+        self._text_ident = 0 
 
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
@@ -80,7 +85,9 @@ class PreProcessor:
                 return str(self._instructions)
 
             self._current_char = self._content[self._point]
-
+            if self._current_char == '\n':
+                self._text_ident+=1
+            
             is_the_end_scope = self.is_string_from_point(self._content, self._point, self.endscope)
             if is_the_end_scope:
                 self._point+=len(self.endscope)
@@ -116,5 +123,6 @@ class PreProcessor:
 
 
     def run(self, file: str) -> str:
+        self._resset_state()
         self.include(file)
         return self._text
