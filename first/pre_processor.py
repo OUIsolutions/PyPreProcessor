@@ -1,7 +1,7 @@
 from typing import List
 from typing import Any
 from .instruction_list import InstructionList
-
+from .extras import aply_ident
 class PreProcessor:
 
     def __init__(self) -> None:
@@ -128,8 +128,6 @@ class PreProcessor:
 
     def exec(self,content:str):
         self._content = content
-        self._previews_file_text_ident = self._normal_text_ident
-
         converted = self.compile()
         self._inside_comptime = False  
         exec(converted)
@@ -138,7 +136,10 @@ class PreProcessor:
 
     def include(self, file: str):       
         with open(file, 'r') as arq:
-             self.exec(arq.read())
+             content = arq.read()
+             formated_content = aply_ident(content,self._normal_text_ident)
+             self.exec(formated_content)
+        self._previews_file_text_ident = self._normal_text_ident
 
 
 
