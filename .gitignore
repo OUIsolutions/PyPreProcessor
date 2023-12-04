@@ -8,7 +8,6 @@ __pycache__/
 PyPreProcessor2.py
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
