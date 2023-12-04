@@ -36,7 +36,10 @@ for e in exemples:
     main_processor.files[e] = data
 
 
-
+readme_result = main_processor.run('templates/README.md')
+with open('README.md','w') as arq:
+    arq.write(readme_result)
+    
 
   
 
