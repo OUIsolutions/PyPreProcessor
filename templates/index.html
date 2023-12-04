@@ -11,13 +11,14 @@
     <table>
 
         <tr>
-            #comp: for key in self.users.keys() #>> #end 
+            #comp: keys = self.users[0].keys() #end 
+            #comp: for key in keys: #>> #end 
                 <th>#comp:self.ref(key)#end</th>
             #<<
         </tr>
-            #comp: for user in self.users #>> #end 
+            #comp: for user in self.users: #>> #end 
             <tr>
-            comp:for key in user: #>> #end 
+                comp:for key in user: #>> #end 
                         comp:value = user[key]#end 
                         <th>#comp:self.ref(value)#end</th>
                 #<<      
