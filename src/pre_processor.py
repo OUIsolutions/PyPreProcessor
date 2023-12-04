@@ -9,10 +9,14 @@ class PreProcessor:
 
     def __init__(self) -> None:
 
-        self.start_comptime = '#comp:'
-        self.start_scope = '#>>'
-        self.endscope = '#<<'
-        self.end_comptime = '#end'
+        #these is for allowing bootstraping process
+        self.start_comptime = '#comp$:'.replace('$','')
+        self.start_scope = '#>$>'.replace('$','')
+        self.endscope = '#<$<'.replace('$','')
+        self.end_comptime = '#en$d'.replace('$','')
+        
+
+        
         self._resset_state()
         # args
         self.t = 20
@@ -127,7 +131,6 @@ class PreProcessor:
 
     def _generate(self,text:bytes):
         self._text+=text.decode('utf-8')
-
 
     def exec(self,content:str):
         self._content = content
