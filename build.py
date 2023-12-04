@@ -2,19 +2,23 @@ from shutil import copy
 from os import system
 from os import listdir
 from os import remove
+from os import makedirs
+from shutil import rmtree
 from PyPreProcessor import PreProcessor
+rmtree('exemples')
+makedirs('exemples')
 
 #boostraping itself 
 system('python3 PyPreProcessor.py  main.py PyPreProcessor.py ')
 
-copy('PyPreProcessor.py','internal_exemples/PyPreProcessor.py')
+copy('PyPreProcessor.py','build/PyPreProcessor.py')
 
 main_processor = PreProcessor()
 main_processor.files = {}
 
-exemples = listdir('internal_exemples')
+exemples = listdir('build')
 for e in exemples:
-    current = f'internal_exemples/{e}'
+    current = f'build/{e}'
     if e == 'PyPreProcessor.py':
         continue
     if not e.endswith('.py'):
@@ -22,9 +26,15 @@ for e in exemples:
 
     p = PreProcessor()
     p.internal = False 
+    result = p.run(current)
     data = {
-        'content':p.run(current),
+        'content':result,
     }
+
+    with open(f'exemples/{e}' ,'w') as arq:
+        arq.write(result)
+
+
     system(f'python3 {current}')
     with open('before.txt','r') as arq:
         data['before'] = arq.read()
