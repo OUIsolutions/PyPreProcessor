@@ -1,1 +1,2 @@
-python3 first/main.py  target.py result.py
+
+python3 src/main.py  target.py result.py

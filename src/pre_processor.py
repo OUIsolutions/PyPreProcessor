@@ -2,8 +2,8 @@
 
 from typing import List
 from typing import Any
-from .instruction_list import InstructionList
-from .extras import aply_ident
+from instruction_list import InstructionList
+from extras import aply_ident
 
 class PreProcessor:
 

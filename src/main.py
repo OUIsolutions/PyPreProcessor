@@ -32,9 +32,11 @@ def main():
         except JSONDecodeError as e:
             print(e)
             exit(1)
-        preprocessor.args= converted_args
+        for key in args:
+            value = args[key]
+            preprocessor.__setattr__(value)
     try:
-        result = preprocessor.compile(target)
+        result = preprocessor.run(target)
     except Exception as e:
         print(traceback.format_exc())
         exit(1)

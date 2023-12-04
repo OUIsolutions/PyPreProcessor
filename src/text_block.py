@@ -1,7 +1,7 @@
 
 #comp:if False:
-from .line import Line
-from .extras import aply_ident
+from line import Line
+from extras import aply_ident
 #end
 
 class TextBlock(Line):
