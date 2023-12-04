@@ -130,18 +130,13 @@ class PreProcessor:
         self._content = content
         converted = self.compile()
         self._inside_comptime = False  
-        print(converted)
+        exec(converted)
         
 
 
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
-
-        print('include=====================================')
-        print('normal',self._normal_text_ident)
-        print('preveiws',self._previews_file_text_ident)
-
-
+        
         with open(file, 'r') as arq:
              content = arq.read()
              formated_content = aply_ident(content,self._normal_text_ident)

@@ -16,13 +16,10 @@ class Soma:
 
 
     #comp: 
-    print("valor",self._normal_text_ident)
-        print("valor",self._normal_text_ident)
-
-    print("valor",self._normal_text_ident)
-
+    print("valor",self._normal_text_ident,"\n")
+    print("target",self._target_file,"\n")
     self.include("a.py")
-    
+
     for i in [1,2,3]:#>>     
     #end
 
