@@ -146,9 +146,12 @@ class PreProcessor:
         
         with open(file, 'r') as arq:
              content = arq.read()
-             formated_content = aply_ident(content,self._normal_text_ident)
-             self.exec(formated_content)
-
+        formated_content = aply_ident(content,self._normal_text_ident)
+        try:     
+            self.exec(formated_content)
+        except Exception as e:
+            print(formated_content)
+            raise e
 
 
     def run(self, file: str) -> str:
