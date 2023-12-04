@@ -1,7 +1,7 @@
 
 
 
-INSERT INTO root (username, email, password) 
+INSERT INTO users (username, email, password) 
 VALUES (
         'Username', 
         'myemail@gamil.com',
