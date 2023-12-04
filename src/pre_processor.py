@@ -1,9 +1,12 @@
 
-
+#comp: if False: #>>  #end
 from typing import List
 from typing import Any
 from instruction_list import InstructionList
 from extras import aply_ident
+#<< 
+
+
 
 class PreProcessor:
 
@@ -131,7 +134,6 @@ class PreProcessor:
         exec(converted)
         
 
-
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
         self._target_file = file
@@ -141,6 +143,8 @@ class PreProcessor:
         formated_content = aply_ident(content,self._normal_text_ident)
         try:     
             self.exec(formated_content)
+            print(formated_content)
+            print('==================================================')
         except Exception as e:
             print(formated_content)
             print('==================================================')
