@@ -1,8 +1,10 @@
 
-#comp:if False:
+
+#comp:if False:  #>> #end 
 from line import Line
 from extras import aply_ident
-#end
+#<<
+
 
 class TextBlock(Line):
 

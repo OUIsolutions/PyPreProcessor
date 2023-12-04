@@ -1,4 +1,4 @@
-#comp: if False: #>>  #end
+#comp:if False: #>>  #end
 from line import Line
 #<<
 
