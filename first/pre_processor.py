@@ -19,7 +19,7 @@ class PreProcessor:
         # args
         self.t = 20
         self.r = 20
-        self.a = "funcionou"
+        self.a = '"#comp: self.aaaaaaaaa #end'
 
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
