@@ -69,7 +69,7 @@ class PreProcessor:
             self._normal_text_ident+=1
 
 
-        is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.start_comptime)
+        is_start_comptime_identfier =self.is_string_from_point(self._content, compiler_props._point, self.start_comptime)
     
         if is_start_comptime_identfier:
             compiler_props._instructions.add_code_block(self._normal_text_ident)
@@ -78,7 +78,7 @@ class PreProcessor:
             return  
         
 
-        compiler_props._instructions.add_text_to_last_instruction(self._current_char)
+        compiler_props._instructions.add_text_to_last_instruction(compiler_props._current_char)
         compiler_props._point+=1
 
         
