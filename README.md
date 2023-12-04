@@ -44,8 +44,8 @@ INSERT INTO
 #comp: if self.is_root: #>>  #end
     root 
 #<<
-#comp:   if not self.is_root: #>> #end 
-        users 
+#comp:if not self.is_root: #>> #end 
+     users 
 #<<
 (username, email, password) 
 VALUES (
@@ -65,7 +65,7 @@ Saida
 INSERT INTO 
 
  
-        users 
+     users 
 
 (username, email, password) 
 VALUES (
