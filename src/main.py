@@ -10,6 +10,7 @@ from sys import exit
 import traceback
 from typing import List
 from typing import Callable
+from traceback import format_exc
 
 
 #comp: if False: #>>  
