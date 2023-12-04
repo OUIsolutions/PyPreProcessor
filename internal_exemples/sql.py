@@ -4,15 +4,14 @@
 from PyPreProcessor import PreProcessor
 
 
+TEMPLATE = 'templates/insert.sql'
 
 #comp:if not self.internal: #>> 
-TEMPLATE = 'templates/insert.sql'
 OUTPUT = "query.sql"
 #<< #end 
 
 
 #comp:if self.internal: #>> 
-TEMPLATE = '../templates/insert.sql'
 OUTPUT = "out.txt"
 #<< #end 
 
