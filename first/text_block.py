@@ -8,8 +8,7 @@ class TextBlock(Line):
 
     def __str__(self) -> str:
    
-        formated_content  = self._content.replace('\n','\\n');  
-        if formated_content == '':
+        if self._content == '':
             return ''
-        
-        return f'{self._ident_text}self._text+="{formated_content}"'
+        formated_content  = self._content.encode('utf-8')
+        return f'{self._ident_text}self._generate({formated_content})'

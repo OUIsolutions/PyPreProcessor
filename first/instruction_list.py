@@ -27,6 +27,7 @@ class InstructionList:
     def add_text_to_last_instruction(self,char:str):
         self._instructions[-1].add_text(char)
 
+    
 
     def __str__(self) -> str:
         result = ''

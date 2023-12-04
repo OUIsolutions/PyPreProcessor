@@ -102,6 +102,9 @@ class PreProcessor:
     def ref(self,element:Any):
         self._text+=str(element)
 
+    def _generate(self,text:bytes):
+        self._text+=text.decode('utf-8')
+
     def include(self, file: str):
         with open(file, 'r') as arq:
             content = arq.read()
