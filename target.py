@@ -18,7 +18,7 @@ class Soma:
     if self.t ==  20:  #>>     
     #end
 
-        r == '#comp: self.ref(self.a)   #end'
+        r == "#comp: self.ref(self.a)   #end"
         v = 30
     
 
