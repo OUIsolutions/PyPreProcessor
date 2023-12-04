@@ -7,8 +7,10 @@ class CodeBlock(Line):
         lines = self._content.split('\n')
         lines = list(map(lambda l: l.strip(),lines))
         lines = list(filter(lambda l: l,lines))
-        formated_conent = '\n'.join(lines)
+        formated_content = ''
+        for i in lines:
+            formated_content+=f'\n{self._ident_text}{i}' 
 
-        if formated_conent == '':
+        if formated_content == '':
             return ''
-        return f'{self._ident_text}{formated_conent}'
+        return formated_content

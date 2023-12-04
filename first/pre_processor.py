@@ -72,7 +72,6 @@ class PreProcessor:
         is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.start_comptime)
     
         if is_start_comptime_identfier:
-            print("start flag",self._normal_text_ident)
             self._instructions.add_code_block()
             self._inside_comptime = True
             self._point += len(self.start_comptime)+1
@@ -131,16 +130,17 @@ class PreProcessor:
         self._content = content
         converted = self.compile()
         self._inside_comptime = False  
-        exec(converted)
+        print(converted)
         
 
 
     def include(self, file: str):       
+        self._previews_file_text_ident = self._normal_text_ident
+
         print('include=====================================')
         print('normal',self._normal_text_ident)
         print('preveiws',self._previews_file_text_ident)
 
-        self._previews_file_text_ident = self._normal_text_ident
 
         with open(file, 'r') as arq:
              content = arq.read()
