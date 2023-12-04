@@ -6,14 +6,10 @@ from PyPreProcessor import PreProcessor
 
 TEMPLATE = 'templates/insert.sql'
 
-#comp:if not self.internal: #>> 
-OUTPUT = "query.sql"
-#<< #end 
+ 
 
-#comp:if self.internal: #>> 
-OUTPUT = "out.txt"
-#<< #end 
 
+ 
 
 p = PreProcessor()
 p.username = 'Username'
@@ -26,8 +22,5 @@ with open(OUTPUT,'w') as arq:
     arq.write(result)
 
 
-#comp:if self.internal: #>> 
-from shutil import copy
-copy(TEMPLATE,'before.txt')
-#<< #end 
+ 
 

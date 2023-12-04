@@ -30,6 +30,8 @@ with open(OUTPUT,'w') as arq:
 
 
 ~~~
+
+
 Antes
 ~~~sql
 
@@ -50,6 +52,8 @@ VALUES (
 );
 
 ~~~
+
+
 Saida
 ~~~sql
 

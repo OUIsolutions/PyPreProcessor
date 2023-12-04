@@ -5,7 +5,7 @@ from os import remove
 from os import makedirs
 from shutil import rmtree
 from PyPreProcessor import PreProcessor
-rmtree('exemples')
+rmtree('exemples',ignore_errors=True)
 makedirs('exemples')
 
 #boostraping itself 
