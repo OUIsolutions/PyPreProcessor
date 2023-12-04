@@ -43,7 +43,7 @@ class PreProcessor:
         is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
         
         if is_an_end_comptime:
-            self._instructions.add_text_block(self._normal_text_ident)
+            self._instructions.add_text_block()
             self._inside_comptime = False
             self._point += len(self.end_comptime)
             return  
@@ -60,13 +60,15 @@ class PreProcessor:
 
 
     def handler_normal_text(self)->bool:
+            
         if self._current_char == '\n':
-            self._normal_text_ident == self._previews_file_text_ident
+            self._normal_text_ident = self._previews_file_text_ident
 
         if self._current_char == ' ':
             self._normal_text_ident+=1
 
-
+    
+        
         is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.start_comptime)
     
         if is_start_comptime_identfier:
@@ -88,9 +90,12 @@ class PreProcessor:
         self._inside_comptime = False
         self._current_char:str  = ''
 
+
         while True:
             if self._point >= len(self._content):
                 return str(self._instructions)
+
+
 
             self._current_char = self._content[self._point]
 
@@ -123,10 +128,12 @@ class PreProcessor:
 
     def exec(self,content:str):
         self._content = content
+        self._previews_file_text_ident = self._normal_text_ident
+
         converted = self.compile()
         self._inside_comptime = False  
         exec(converted)
-        self._previews_file_text_ident = self._normal_text_ident
+        
 
 
     def include(self, file: str):       

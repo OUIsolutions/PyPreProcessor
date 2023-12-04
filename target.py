@@ -14,7 +14,7 @@ class Soma:
     def __init__(self) -> None:
         pass
 
-    #comp:
+       #comp: 
     self.include("a.py")
     for i in [1,2,3]:#>>     
     #end

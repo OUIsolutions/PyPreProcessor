@@ -8,7 +8,7 @@ class InstructionList:
     def __init__(self,normal_text_ident:int) -> None:
         self._ident_level = 0
         self._instructions:List[TextBlock or CodeBlock] = [
-            TextBlock(self._ident_level,normal_text_ident)
+            TextBlock(self._ident_level)
         ]
     
     def increase_ident(self):
@@ -33,8 +33,8 @@ class InstructionList:
             result+=str(i) +"\n"
         return result
 
-    def add_text_block(self,normal_text_ident:str):
-        self._instructions.append(TextBlock(self._ident_level,normal_text_ident))
+    def add_text_block(self):
+        self._instructions.append(TextBlock(self._ident_level))
 
  
     def add_code_block(self):
