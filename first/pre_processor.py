@@ -20,7 +20,7 @@ class PreProcessor:
 
     def _resset_state(self):
         self._text = ''
-        self._instructions = InstructionList()
+        self._instructions = InstructionList(0)
         self._point = 0
         self._content:str =''
         self._inside_comptime = False
@@ -83,7 +83,7 @@ class PreProcessor:
 
     def compile(self) -> str:
      
-        self._instructions = InstructionList()
+        self._instructions = InstructionList(self._normal_text_ident)
         self._point = 0
         self._inside_comptime = False
         self._current_char:str  = ''

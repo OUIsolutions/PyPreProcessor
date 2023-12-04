@@ -5,10 +5,10 @@ from typing import Callable
 
 class InstructionList:
 
-    def __init__(self) -> None:
+    def __init__(self,normal_text_ident:int) -> None:
         self._ident_level = 0
         self._instructions:List[TextBlock or CodeBlock] = [
-            TextBlock(self._ident_level)
+            TextBlock(self._ident_level,normal_text_ident)
         ]
     
     def increase_ident(self):

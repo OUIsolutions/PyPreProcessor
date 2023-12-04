@@ -15,5 +15,5 @@ class TextBlock(Line):
         if self._content == '':
             return ''
         formated_content = aply_ident(self._content,self._normal_text_ident)
-        formated_content  = self._content.encode('utf-8')
+        formated_content  = formated_content.encode('utf-8')
         return f'{self._ident_text}self._generate({formated_content})'
