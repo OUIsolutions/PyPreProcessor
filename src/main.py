@@ -1,12 +1,23 @@
 
-
-from pre_processor import PreProcessor
 from json import loads
 from json import JSONDecodeError
 from sys import argv
 from sys import exit
-
 import traceback
+
+
+#internal files will be referenced by include
+#comp: if False: #>> 
+from pre_processor import PreProcessor
+#<< 
+#end
+
+#comp: self.include("src/code_block.py") #end 
+
+
+
+
+
 def main():
     try:
         target = argv[1]

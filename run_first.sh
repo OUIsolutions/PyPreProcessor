@@ -1,2 +1,2 @@
 
-python3 src/main.py  target.py result.py
+python3 src/main.py  src/main.py PyPreProcessor.py

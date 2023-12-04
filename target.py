@@ -1,4 +1,0 @@
-
-
-def soma():
-    pass 
