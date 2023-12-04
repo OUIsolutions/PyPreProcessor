@@ -43,7 +43,7 @@ class PreProcessor:
         is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
         
         if is_an_end_comptime:
-            self._instructions.add_text_block()
+            self._instructions.add_text_block(self._normal_text_ident)
             self._inside_comptime = False
             self._point += len(self.end_comptime)
             return  
@@ -127,7 +127,7 @@ class PreProcessor:
         self._inside_comptime = False  
         exec(converted)
         self._previews_file_text_ident = self._normal_text_ident
-        
+
 
     def include(self, file: str):       
         with open(file, 'r') as arq:
