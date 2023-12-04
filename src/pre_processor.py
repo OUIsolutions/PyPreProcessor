@@ -4,6 +4,8 @@ from typing import List
 from typing import Any
 from instruction_list import InstructionList
 from extras import aply_ident
+from traceback import format_exc
+from compiler_props import CompilerProps 
 #<< 
 
 
@@ -17,19 +19,15 @@ class PreProcessor:
         self.start_scope = '#>$>'.replace('$','')
         self.endscope = '#<$<'.replace('$','')
         self.end_comptime = '#en$d'.replace('$','')        
-        self._resset_state()
-        
+        self._resset_props()
+    
 
-    def _resset_state(self):
-        self._text = ''
-        self._instructions = InstructionList()
-        self._point = 0
-        self._content:str =''
-        self._inside_comptime = False
-        self._current_char:str  = ''
+
+    def _resset_props(self):
         #these is the ident of the text, not the comptime text
         self._normal_text_ident = 0 
         self._previews_file_text_ident = 0
+        self._inside_comptime = False
 
     def is_string_from_point(self, content: str, point: int, expected: str):
         try:
@@ -40,7 +38,7 @@ class PreProcessor:
 
 
 
-    def handler_comptime_text(self)->bool:
+    def handler_comptime_text(self,compiler_props:CompilerProps)->bool:
 
         is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
         
@@ -61,21 +59,21 @@ class PreProcessor:
 
 
 
-    def handler_normal_text(self)->bool:
+    def handler_normal_text(self,compiler_props:CompilerProps)->bool:
             
-        if self._current_char == '\n':
+        if compiler_props._current_char == '\n':
             self._normal_text_ident =self._previews_file_text_ident
 
-        if self._current_char == ' ':
+        if compiler_props._current_char == ' ':
             self._normal_text_ident+=1
 
 
         is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.start_comptime)
     
         if is_start_comptime_identfier:
-            self._instructions.add_code_block(self._normal_text_ident)
+            compiler_props._instructions.add_code_block(self._normal_text_ident)
             self._inside_comptime = True
-            self._point += len(self.start_comptime)
+            compiler_props._point += len(self.start_comptime)
             return  
         
 
@@ -86,33 +84,34 @@ class PreProcessor:
 
     def compile(self) -> str:
      
-        self._instructions = InstructionList()
-        self._point = 0
-        self._inside_comptime = False
-        self._current_char:str  = ''
-
+        compiler_props = CompilerProps()
 
         while True:
-            if self._point >= len(self._content):
-                return str(self._instructions)
+            if compiler_props._point >= len(compiler_props._content):
+                return str(compiler_props._instructions)
 
-            self._current_char = self._content[self._point]
+            compiler_props._current_char = compiler_props._content[compiler_props._point]
             
-            is_the_end_scope = self.is_string_from_point(self._content, self._point, self.endscope)
+            is_the_end_scope = self.is_string_from_point(
+                compiler_props._content, 
+                compiler_props._point, 
+                self.endscope
+                )
+            
             if is_the_end_scope:
-                self._point+=len(self.endscope)
-                self._instructions.decrease_code_ident()
+                compiler_props._point+=len(self.endscope)
+                compiler_props._instructions.decrease_code_ident()
                 continue
 
             is_a_normal_text = not self._inside_comptime
             
 
             if is_a_normal_text:
-              self.handler_normal_text()
+              self.handler_normal_text(compiler_props)
               continue  
             
             if self._inside_comptime:
-               self.handler_comptime_text()
+               self.handler_comptime_text(compiler_props)
                continue  
 
 
@@ -132,8 +131,10 @@ class PreProcessor:
             exec(converted)
         except Exception as e:
             print(converted)
-            print('==================================================')     
-
+            print('==================================================')  
+            print(format_exc(e))   
+            raise e 
+        
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
         self._target_file = file
@@ -147,6 +148,6 @@ class PreProcessor:
  
 
     def run(self, file: str) -> str:
-        self._resset_state()
+        self._resset_props()
         self.include(file)
         return self._text
