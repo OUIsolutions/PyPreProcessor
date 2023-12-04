@@ -2,10 +2,10 @@
 
 
 INSERT INTO #comp: 
-    if self.root_user: #>> 
+    if self.is_root: #>> 
         self.ref('root')
     #<<
-    if not self.root_user: #>> 
+    if not self.is_root: #>> 
         self.ref('users')
     #<<
     #end (username, email, password) 
