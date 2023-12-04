@@ -13,12 +13,19 @@ class InstructionList:
 
     def increase_code_ident(self):
         self._ident_level+=1
+        constructor = self._instructions[-1].__class__
+        generated = constructor(self._ident_level)
+        self._instructions.append(generated)
+
         
   
 
     def decrease_code_ident(self):
         self._ident_level-=1
-
+        constructor = self._instructions[-1].__class__
+        generated = constructor(self._ident_level)
+        self._instructions.append(generated)
+        
     def add_text_to_last_instruction(self,char:str):
         self._instructions[-1].add_text(char)
 

@@ -10,9 +10,9 @@ from sys import exit
 import traceback
 
 
-#comp: if False: #>>  
+#comp: if False: #>>  #end
 from pre_processor import PreProcessor
-#<< #end
+#<< 
 
 
 
