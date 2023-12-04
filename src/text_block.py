@@ -1,9 +1,9 @@
 
 
-#comp:if False:  #>> #end 
+#comp:if False:  #>>
 from line import Line
 from extras import aply_ident
-#<<
+#<< #end 
 
 
 class TextBlock(Line):

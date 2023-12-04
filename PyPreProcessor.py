@@ -19,7 +19,7 @@ import traceback
 #comp#: self.include("src/extras.py") #end 
 #comp#: self.include("src/line.py") #end 
 #comp#: self.include("src/code_block.py") #end 
-#comp#: self.include("src/text_block.py") #end 
+ 
 from text_block import TextBlock
 from code_block import CodeBlock
 from typing import List
@@ -197,9 +197,11 @@ class PreProcessor:
         self._content = content
         converted = self.compile()
         self._inside_comptime = False  
-        exec(converted)
-        #print(converted)
-        #print('==================================================')     
+        try:
+            exec(converted)
+        except Exception as e:
+            print(converted)
+            print('==================================================')     
 
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
@@ -208,14 +210,10 @@ class PreProcessor:
         with open(file, 'r') as arq:
              content = arq.read()
         formated_content = aply_ident(content,self._normal_text_ident)
-        try:     
-            self.exec(formated_content)
+    
+        self.exec(formated_content)
 
-        except Exception as e:
-            print(formated_content)
-            print('==================================================')
-            raise e
-
+ 
 
     def run(self, file: str) -> str:
         self._resset_state()
