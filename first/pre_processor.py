@@ -20,7 +20,7 @@ class PreProcessor:
 
     def _resset_state(self):
         self._text = ''
-        self._instructions = InstructionList(0)
+        self._instructions = InstructionList()
         self._point = 0
         self._content:str =''
         self._inside_comptime = False
@@ -39,6 +39,7 @@ class PreProcessor:
 
 
     def handler_comptime_text(self)->bool:
+        #print("comp flag",self._normal_text_ident)
 
         is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
         
@@ -62,16 +63,16 @@ class PreProcessor:
     def handler_normal_text(self)->bool:
             
         if self._current_char == '\n':
-            self._normal_text_ident = self._previews_file_text_ident
+            self._normal_text_ident =self._previews_file_text_ident
 
         if self._current_char == ' ':
             self._normal_text_ident+=1
 
-    
-        
+
         is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.start_comptime)
     
         if is_start_comptime_identfier:
+            print("start flag",self._normal_text_ident)
             self._instructions.add_code_block()
             self._inside_comptime = True
             self._point += len(self.start_comptime)+1
@@ -85,7 +86,7 @@ class PreProcessor:
 
     def compile(self) -> str:
      
-        self._instructions = InstructionList(self._normal_text_ident)
+        self._instructions = InstructionList()
         self._point = 0
         self._inside_comptime = False
         self._current_char:str  = ''
@@ -135,11 +136,16 @@ class PreProcessor:
 
 
     def include(self, file: str):       
+        print('include=====================================')
+        print('normal',self._normal_text_ident)
+        print('preveiws',self._previews_file_text_ident)
+
+        self._previews_file_text_ident = self._normal_text_ident
+
         with open(file, 'r') as arq:
              content = arq.read()
              formated_content = aply_ident(content,self._normal_text_ident)
              self.exec(formated_content)
-        self._previews_file_text_ident = self._normal_text_ident
 
 
 
