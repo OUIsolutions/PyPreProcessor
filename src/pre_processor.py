@@ -128,9 +128,9 @@ class PreProcessor:
         self._content = content
         converted = self.compile()
         self._inside_comptime = False  
-        #exec(converted)
-        print(converted)
-        print('==================================================')     
+        exec(converted)
+        #print(converted)
+        #print('==================================================')     
 
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
