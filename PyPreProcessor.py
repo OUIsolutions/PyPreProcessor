@@ -8,6 +8,8 @@ from json import JSONDecodeError
 from sys import argv
 from sys import exit
 import traceback
+from typing import List
+from typing import Callable
 
 
 
@@ -91,10 +93,10 @@ class TextBlock(Line):
             return ''
         formated_content  = self._content.encode('utf-8')
         return f'{self._ident_text}self._generate({formated_content})' 
-from text_block import TextBlock
-from code_block import CodeBlock
-from typing import List
-from typing import Callable
+
+
+ 
+
 class InstructionList:
 
     def __init__(self) -> None:

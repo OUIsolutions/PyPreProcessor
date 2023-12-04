@@ -8,6 +8,8 @@ from json import JSONDecodeError
 from sys import argv
 from sys import exit
 import traceback
+from typing import List
+from typing import Callable
 
 
 #comp: if False: #>>  

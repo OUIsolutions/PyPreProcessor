@@ -1,7 +1,13 @@
+
+
+#comp: if False:#>>
 from text_block import TextBlock
 from code_block import CodeBlock
 from typing import List
 from typing import Callable
+
+#<< #end 
+
 class InstructionList:
 
     def __init__(self) -> None:
