@@ -43,19 +43,19 @@ class PreProcessor:
         is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
         
         if is_an_end_comptime:
-            self._instructions.add_text_block()
+            compiler_props._instructions.add_text_block()
             self._inside_comptime = False
-            self._point += len(self.end_comptime)
+            compiler_props._point += len(self.end_comptime)
             return  
         
         is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
         if is_start_scope:
-            self._instructions.increase_code_ident()
-            self._point+=len(self.start_scope)
+            compiler_props._instructions.increase_code_ident()
+            compiler_props._point+=len(self.start_scope)
             return 
         
-        self._instructions.add_text_to_last_instruction(self._current_char)
-        self._point+=1
+        compiler_props._instructions.add_text_to_last_instruction(self._current_char)
+        compiler_props._point+=1
 
 
 
