@@ -39,7 +39,6 @@ class PreProcessor:
 
 
     def handler_comptime_text(self)->bool:
-        #print("comp flag",self._normal_text_ident)
 
         is_an_end_comptime =self.is_string_from_point(self._content, self._point, self.end_comptime)
         
@@ -130,7 +129,7 @@ class PreProcessor:
         self._content = content
         converted = self.compile()
         self._inside_comptime = False  
-        print(converted)
+        exec(converted)
         
 
 
