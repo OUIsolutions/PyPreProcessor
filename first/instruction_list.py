@@ -11,11 +11,12 @@ class InstructionList:
             TextBlock(self._ident_level)
         ]
     
-    def increase_ident(self):
+
+    def increase_code_ident(self):
         self._ident_level+=1
   
 
-    def decrease_ident(self):
+    def decrease_code_ident(self):
         self._ident_level-=1
 
 
@@ -37,6 +38,8 @@ class InstructionList:
         self._instructions.append(TextBlock(self._ident_level))
 
  
-    def add_code_block(self):
-        self._instructions.append(CodeBlock(self._ident_level))
+    def add_code_block(self,normal_text_ident:int):
+        block  = CodeBlock(self._ident_level)
+        block.add_text(f'self._normal_text_ident = {normal_text_ident}\n')
+        self._instructions.append(block)
    

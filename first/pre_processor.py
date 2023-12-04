@@ -51,7 +51,7 @@ class PreProcessor:
         
         is_start_scope = self.is_string_from_point(self._content, self._point, self.start_scope)
         if is_start_scope:
-            self._instructions.increase_ident()
+            self._instructions.increase_code_ident()
             self._point+=len(self.start_scope)
             return 
         
@@ -72,7 +72,7 @@ class PreProcessor:
         is_start_comptime_identfier =self.is_string_from_point(self._content, self._point, self.start_comptime)
     
         if is_start_comptime_identfier:
-            self._instructions.add_code_block()
+            self._instructions.add_code_block(self._normal_text_ident)
             self._inside_comptime = True
             self._point += len(self.start_comptime)+1
             return  
@@ -103,7 +103,7 @@ class PreProcessor:
             is_the_end_scope = self.is_string_from_point(self._content, self._point, self.endscope)
             if is_the_end_scope:
                 self._point+=len(self.endscope)
-                self._instructions.decrease_ident()
+                self._instructions.decrease_code_ident()
                 continue
 
             is_a_normal_text = not self._inside_comptime
@@ -130,12 +130,13 @@ class PreProcessor:
         self._content = content
         converted = self.compile()
         self._inside_comptime = False  
-        exec(converted)
+        print(converted)
         
 
 
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
+        self._target_file = file
         
         with open(file, 'r') as arq:
              content = arq.read()
