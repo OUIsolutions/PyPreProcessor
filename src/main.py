@@ -7,12 +7,10 @@ import traceback
 
 
 #internal files will be referenced by include
-#comp: if False: #>>
-
-
+#comp: if False: #>>  #end
 from pre_processor import PreProcessor
+
 #<< 
-#end
 
 #comp: self.include("src/code_block.py") #end 
 
