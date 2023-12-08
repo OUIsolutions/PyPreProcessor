@@ -149,6 +149,32 @@ class PreProcessor:
         
 
 
+    def embed(self, file: str):       
+        self._previews_file_text_ident = self._normal_text_ident
+        self._target_file = file
+        old_path = self.current_path
+        try:
+            #first try the absolute import
+            with open(file, 'r') as arq:
+                content = arq.read()
+                self.current_path = dirname(file)
+
+        except FileNotFoundError as e:
+            if not self.current_path:
+                raise e 
+            relative_path = join(self.current_path,file)
+            self.current_path = dirname(relative_path)
+            
+            with open(relative_path, 'r') as arq:
+                content = arq.read()
+
+
+        formated_content = aply_ident(content,self._normal_text_ident)
+    
+        self.exec(formated_content)
+        self.current_path = old_path
+ 
+
 
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
