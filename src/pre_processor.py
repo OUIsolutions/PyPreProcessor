@@ -8,6 +8,7 @@ from traceback import format_exc
 from .compiler_props import CompilerProps 
 from os.path import dirname
 from os.path import join
+
 #<< 
 
 
@@ -20,7 +21,8 @@ class PreProcessor:
         self.start_comptime = '#comp$:'.replace('$','')
         self.start_scope = '#>$>'.replace('$','')
         self.endscope = '#<$<'.replace('$','')
-        self.end_comptime = '#en$d'.replace('$','')        
+        self.end_comptime = '#en$d'.replace('$','')
+        self.relative_paths = []
         self._resset_props()
     
 
@@ -156,11 +158,12 @@ class PreProcessor:
             #first try the absolute import
             with open(file, 'r') as arq:
                 content = arq.read()
-        except FileNotFoundError:
-            pass 
-        
-        if not content:
-            relative_path = join(dirname(file),file)
+                self.relative_paths.append(dirname(file))
+        except FileNotFoundError as e:
+            if not self.relative_paths:
+                raise e 
+            last_relative_path = self.relative_paths[-1]
+            relative_path = join(last_relative_path,file)
             with open(relative_path, 'r') as arq:
                 content = arq.read()
 
