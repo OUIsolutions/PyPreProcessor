@@ -165,8 +165,8 @@ class PreProcessor:
 
         if ref:
             self._text+=f'{ref}='
-
-        self._text+=str(content)
+        
+        self._text+=f"{content.encode('utf8')}"
 
 
     def include(self, file: str):       
