@@ -159,11 +159,13 @@ class PreProcessor:
             with open(file, 'r') as arq:
                 content = arq.read()
                 self.relative_paths.append(dirname(file))
+
         except FileNotFoundError as e:
             if not self.relative_paths:
                 raise e 
             last_relative_path = self.relative_paths[-1]
             relative_path = join(last_relative_path,file)
+            self.relative_paths.append(relative_path)
             with open(relative_path, 'r') as arq:
                 content = arq.read()
 
