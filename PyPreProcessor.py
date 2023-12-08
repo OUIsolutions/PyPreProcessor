@@ -11,7 +11,8 @@ import traceback
 from typing import List
 from typing import Callable
 from traceback import format_exc
-
+from os.path import dirname
+from os.path import join
 
 
 
@@ -293,13 +294,26 @@ class PreProcessor:
             print(format_exc())   
             raise e 
         
-        
+
+
+
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
         self._target_file = file
+        content:str = None
+        try:
+            #first try the absolute import
+            with open(file, 'r') as arq:
+                content = arq.read()
+        except FileNotFoundError:
+            pass 
         
-        with open(file, 'r') as arq:
-             content = arq.read()
+        if not content:
+            relative_path = join(dirname(file),file)
+            with open(relative_path, 'r') as arq:
+                content = arq.read()
+
+
         formated_content = aply_ident(content,self._normal_text_ident)
     
         self.exec(formated_content)

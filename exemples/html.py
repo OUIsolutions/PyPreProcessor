@@ -7,9 +7,11 @@ from PyPreProcessor import PreProcessor
 TEMPLATE = 'templates/index.html'
 
  
-OUTPUT = "query.sql"
+OUTPUT = "index.html"
   
 
+
+ 
 
 
 p = PreProcessor()
