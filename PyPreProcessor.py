@@ -170,7 +170,7 @@ class PreProcessor:
         self.start_scope = '#>$>'.replace('$','')
         self.endscope = '#<$<'.replace('$','')
         self.end_comptime = '#en$d'.replace('$','')
-        self.relative_paths = []
+        self.current_path = None
         self._resset_props()
     
 
@@ -301,17 +301,19 @@ class PreProcessor:
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
         self._target_file = file
-        content:str = None
+        old_path = self.current_path
         try:
             #first try the absolute import
             with open(file, 'r') as arq:
                 content = arq.read()
-                self.relative_paths.append(dirname(file))
+                self.current_path = dirname(file)
+
         except FileNotFoundError as e:
-            if not self.relative_paths:
+            if not self.current_path:
                 raise e 
-            last_relative_path = self.relative_paths[-1]
-            relative_path = join(last_relative_path,file)
+            relative_path = join(self.current_path,file)
+            self.current_path = dirname(relative_path)
+            
             with open(relative_path, 'r') as arq:
                 content = arq.read()
 
@@ -319,6 +321,7 @@ class PreProcessor:
         formated_content = aply_ident(content,self._normal_text_ident)
     
         self.exec(formated_content)
+        self.current_path = old_path
  
 
     def run(self, file: str) -> str:

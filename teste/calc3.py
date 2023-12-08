@@ -1,4 +1,4 @@
 #comp:self.include("sub/calc2.py")#end 
 
-def soma(x,y):
+def somav(x,y):
     return x + y 
