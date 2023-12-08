@@ -161,7 +161,7 @@ class PreProcessor:
             if not self.current_path:
                 raise e 
             relative_path = join(self.current_path,file)            
-            with open(relative_path, 'r') as arq:
+            with open(relative_path, 'rb') as arq:
                 content = arq.read()
 
         if ref:
