@@ -297,6 +297,25 @@ class PreProcessor:
         
 
 
+    def embed(self, file: str,ref:str=None):       
+
+        try:
+            #first try the absolute import
+            with open(file, 'rb') as arq:
+                content = arq.read()
+
+        except FileNotFoundError as e:
+            if not self.current_path:
+                raise e 
+            relative_path = join(self.current_path,file)            
+            with open(relative_path, 'r') as arq:
+                content = arq.read()
+
+        if ref:
+            self._text+=f'{ref}='
+
+        self._text+=str(content)
+
 
     def include(self, file: str):       
         self._previews_file_text_ident = self._normal_text_ident
