@@ -11,8 +11,6 @@ OUTPUT = "query.sql"
   
 
 
- 
-
 
 p = PreProcessor()
 p.users =[
