@@ -13,6 +13,7 @@ from typing import Callable
 from traceback import format_exc
 from os.path import dirname
 from os.path import join
+import base64
 
 #comp: if False: #>>  
 from src  import PreProcessor

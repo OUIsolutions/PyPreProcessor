@@ -13,6 +13,7 @@ from typing import Callable
 from traceback import format_exc
 from os.path import dirname
 from os.path import join
+import base64
 
 
 
@@ -314,7 +315,7 @@ class PreProcessor:
         if ref:
             self._text+=f'{ref}='
         
-        self._text+=f"{content.encode('utf8')}"
+        self._text+=f'base64.decodebytes({base64.encodebytes(content)})'
 
 
     def include(self, file: str):       

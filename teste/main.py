@@ -1,8 +1,7 @@
+import base64
 
-#comp:self.include("calc.py")#end 
-#comp:self.include("calc3.py")#end 
+y:bytes
+#comp:self.embed("teste/screen.png","y")#end
 
-x = soma(10,20)
-y:str
-#comp:self.embed("index.html","y")#end
-print(x)
+with open('out.png','wb') as arq:
+    arq.write(y)
