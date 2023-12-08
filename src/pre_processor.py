@@ -166,7 +166,7 @@ class PreProcessor:
         if ref:
             self._text+=f'{ref}='
         
-        self._text+=f'{content.encode("utf-8")}'
+        self._text+=f'str({content.encode("utf-8")}.decode("utf-8"))'
 
 
     def embed(self, file: str,ref:str=None):       
